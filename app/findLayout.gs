@@ -104,3 +104,9 @@ function loadLayoutCache(config = {}) {
     return `${key} - ${LAYOUT_PLACEHOLDER_MAP_CACHE[key].getLayoutName()}`
   }).join('\n'))
 }
+
+function getLayoutsList () {
+  loadLayoutCache()
+
+  return LAYOUT_CACHE
+}
