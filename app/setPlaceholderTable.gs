@@ -61,7 +61,7 @@ function setPlaceholderTable (shape, tableMarkdown) {
           textStyle.setBold(true)
         } else {
           // 設定內容顏色
-          if (row % 2 === 1) {
+          if ((row - headersLength) % 2 === 0) {
             fill.setSolidFill(SlidesApp.ThemeColorType.LIGHT1); // 淺藍色，用於交替行
           } else {
             fill.setSolidFill("#EEEEEE"); // 淺灰色
