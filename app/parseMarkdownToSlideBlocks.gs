@@ -55,8 +55,8 @@ function parseMarkdownToSlideBlocks(markdown) {
         const imageUrl = trimmed.match(/^!\[.*?\]\((.*?)\)/)[1];
         appendBody()
         result.push({
-          type: "PICTURE",
-          text: imageUrl
+          type: "BODY",
+          text: trimmed
         })
       }
       else if (trimmed === '') {

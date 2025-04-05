@@ -6,7 +6,7 @@ function setPlaceholderBody(shape, markdown) {
   markdown = markdown.trim()
 
   let placeholder = shape
-  let content = markdown
+  // let content = markdown
 
   // ==========
 
