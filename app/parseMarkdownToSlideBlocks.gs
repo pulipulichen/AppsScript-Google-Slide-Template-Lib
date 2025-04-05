@@ -31,13 +31,30 @@ function parseMarkdownToSlideBlocks(markdown) {
       }
     }
 
+    let appendCode = () => {
+      if (codeBuffer.length > 0) {
+        result.push({
+          type: "BODY",
+          text: codeBuffer.join('\n') 
+        })
+        codeBuffer = []
+      }
+    }
+
+    let codeBuffer = []
+    let isCode = false
+
     for (const line of lines) {
       const trimmed = line.trim();
 
       // let isBody = false
       if (trimmed.startsWith('::: layout=')) {
         layout = trimmed.slice(11)
-      } else if (trimmed.startsWith('# ')) {
+      } 
+      else if (isCode) {
+        codeBuffer.push(line)
+      }
+      else if (trimmed.startsWith('# ')) {
         let title = trimmed.replace(/^#\s*/, '');
         appendBody()
         result.push({
@@ -62,12 +79,25 @@ function parseMarkdownToSlideBlocks(markdown) {
       else if (trimmed === '') {
         appendBody()
       }
+      else if (trimmed.startsWith('```')) {
+        if (isCode === false) {
+          isCode = true 
+          appendCode()
+          codeBuffer.push(line)
+        }
+        else {
+          isCode = false
+          codeBuffer.push(line)
+          appendCode()
+        }
+      }
       else {
         bodyBuffer.push(line)
       }
     }
 
     appendBody()
+    appendCode()
 
     let types = {}
 
@@ -93,6 +123,7 @@ function parseMarkdownToSlideBlocks(markdown) {
     output.push(item)
   }
   
+  Logger.log(output)
 
   return output;
 }

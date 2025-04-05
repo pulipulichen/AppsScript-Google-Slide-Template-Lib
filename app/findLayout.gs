@@ -15,7 +15,12 @@ function findLayout(layoutName) {
   }
 
   if (!LAYOUT_CACHE[layoutName]) {
-    return LAYOUT_CACHE['TITLE_AND_BODY']
+    if (LAYOUT_CACHE['TITLE_AND_BODY']) {
+      return LAYOUT_CACHE['TITLE_AND_BODY']
+    }
+    else if (LAYOUT_CACHE['TITLE_AND_BODY_1']) {
+      return LAYOUT_CACHE['TITLE_AND_BODY_1']
+    } 
   }
   
   return LAYOUT_CACHE[layoutName]
@@ -41,7 +46,7 @@ function detectLayout(elements, config = {}) {
   // types.sort((a, b) => b.localeCompare(a))
 
   let typesKey = types.join(',')
-  Logger.log('來找:' + typesKey)
+  // Logger.log('來找:' + typesKey)
 
   // =================
 
@@ -55,7 +60,7 @@ function detectLayout(elements, config = {}) {
   }
 
   if (!LAYOUT_PLACEHOLDER_MAP_CACHE[typesKey]) {
-    return LAYOUT_CACHE['TITLE_AND_BODY']
+    return findLayout()
   }
   
   return LAYOUT_PLACEHOLDER_MAP_CACHE[typesKey]
@@ -83,15 +88,15 @@ function loadLayoutCache(config = {}) {
       let types = sortedPlaceholders.map(i => i.type)
 
       if (excludeElements.length > 0) {
-        Logger.log(types)
+        // Logger.log(types)
         types = removeIfContainsAll(types, excludeElements)
-        Logger.log(types)
+        // Logger.log(types)
       }
       // types.sort((a, b) => (b + '').localeCompare(a + ''))
 
       let typesKey = types.join(',')
 
-      Logger.log(`${name} - ${typesKey} - ${excludeElements.length}`)
+      // Logger.log(`${name} - ${typesKey} - ${excludeElements.length}`)
 
       if (!LAYOUT_PLACEHOLDER_MAP_CACHE[typesKey]) {
         LAYOUT_PLACEHOLDER_MAP_CACHE[typesKey] = LAYOUT_CACHE[name]
@@ -100,9 +105,9 @@ function loadLayoutCache(config = {}) {
   }
 
   // Logger.log(Object.keys(LAYOUT_CACHE))
-  Logger.log(Object.keys(LAYOUT_PLACEHOLDER_MAP_CACHE).map(key => {
-    return `${key} - ${LAYOUT_PLACEHOLDER_MAP_CACHE[key].getLayoutName()}`
-  }).join('\n'))
+  // Logger.log(Object.keys(LAYOUT_PLACEHOLDER_MAP_CACHE).map(key => {
+    // return `${key} - ${LAYOUT_PLACEHOLDER_MAP_CACHE[key].getLayoutName()}`
+  // }).join('\n'))
 }
 
 function getLayoutsList () {
