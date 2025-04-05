@@ -25,6 +25,9 @@ function setPlaceholders(sortedPlaceholders, types, config) {
         if (isMarkdownPicture(text)) {
           setPlaceholderPicture(object, text)
         }
+        else if (isMarkdownTable(text)) {
+          setPlaceholderTable(object, text)
+        }
         else {
           setPlaceholderBody(object, text)
         }
