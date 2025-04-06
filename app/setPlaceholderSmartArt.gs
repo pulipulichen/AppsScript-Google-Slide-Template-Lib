@@ -4,13 +4,13 @@ function setPlaceholderSmartArt(shape, markdown) {
   }
 
   let firstLine = markdown.slice(0, markdown.indexOf('\n')).trim()
-  let type = firstLine.slice(firstLine.indexOf('`') + 1).trim()
+  let {type, config} = firstLine.slice(firstLine.indexOf('`') + 1).trim()
 
   let code = markdown.slice(markdown.indexOf('\n') + 1, markdown.lastIndexOf('\n'))
   if (type === 'smartart:td') {
-    setPlaceholderSmartArtTD(shape, code)
+    setPlaceholderSmartArtTD(shape, code, config)
   }
   else {
-    setPlaceholderSmartArtTD(shape, code)
+    setPlaceholderSmartArtTD(shape, code, config)
   }
 }

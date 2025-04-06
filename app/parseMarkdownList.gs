@@ -31,8 +31,27 @@ function parseMarkdownList(markdown) {
             indentStack.length = level + 1;
         }
 
-        result.push({ level, text, type });
+        let {title, subtitle} = parseMarkdownListItemTitle(text)
+
+        result.push({ level, text, type, title, subtitle });
     }
 
     return result;
+}
+
+function parseMarkdownListItemTitle(text) {
+    // 分析標題
+    let title, subtitle
+
+    let pos = text.indexOf(':')
+    if (pos === -1) {
+        pos = text.indexOf('：')
+    }
+    
+    if (pos > -1) {
+        title = text.slice(0, pos).trim()
+        subtitle = text.slice(pos + 1).trim()
+    }
+
+    return {title, subtitle}
 }

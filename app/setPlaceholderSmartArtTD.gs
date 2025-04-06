@@ -1,4 +1,4 @@
-function setPlaceholderSmartArtTD(shape, markdown) {
+function setPlaceholderSmartArtTD(shape, markdown, config = {}) {
   let list = parseMarkdownList(markdown)
   // Logger.log(list)
 
@@ -36,15 +36,25 @@ function setPlaceholderSmartArtTD(shape, markdown) {
 
   // Logger.log(SlidesApp.ThemeColorType.DARK2)
 
+  let sourceShape = getTemplatePageElement('SHAPE_SHADOW')
+  
+
+
   for (let i = 0; i < list.length; i++) {
     let {type, text, level} = list[i]
 
     const top = containerTop + ((i * (shapeVerticalMargin + shapeHeight)))
     const left = containerLeft + ((i * (shapeHorizontalMargin)))
 
-    const itemShape = slide.insertShape(SlidesApp.ShapeType.ROUND_RECTANGLE, left, top, shapeWidth, shapeHeight);
+    // const itemShape = slide.insertShape(SlidesApp.ShapeType.ROUND_RECTANGLE, left, top, shapeWidth, shapeHeight);
+    const itemShape = slide.insertShape(sourceShape)
+    itemShape.setLeft(left)
+    itemShape.setTop(top)
+    itemShape.setWidth(shapeWidth)
+    itemShape.setHeight(shapeHeight)
 
     let textRange = itemShape.getText()
+    textRange.clear()
     textRange.setText(text);
 
     let fontSize = shapeHeight / 2
@@ -62,6 +72,34 @@ function setPlaceholderSmartArtTD(shape, markdown) {
     border.getLineFill().setSolidFill("#FFFFFF")
 
     let paragraphStyle = textRange.getParagraphStyle()
-    paragraphStyle.setParagraphAlignment(SlidesApp.ParagraphAlignment.CENTER)
+    paragraphStyle.setParagraphAlignment(SlidesApp.ParagraphAlignment.CENTER)    
   }
+
+  // const presentationId = presentationId
+  // const presentation2 = Slides.Presentations.get(presentationId);
+  // const slides = presentation2.slides;
+
+  // const requests = []
+  // Logger.log(slides.length); // *** 新增日誌 ***
+  // slides[(slides.length - 1)].pageElements.forEach(element => {
+    
+  //   if ((element.shape?.shapeType) + '' !== 'ROUND_RECTANGLE') {
+  //     return
+  //   }
+  //   Logger.log(`  Element ID: ${element.objectId}, Type: ${element.shape?.shapeType}`);
+  //   let shapeId = element.objectId
+
+  //   requests.push({
+  //     updateShapeProperties: {
+  //       objectId: shapeId,
+  //       shapeProperties: {
+  //         shadow: 
+  //       },
+  //       fields: "contentAlignment,autofit.autofitType"
+  //     }
+  //   })
+  // });
+
+  // const Presentation = Slides.Presentations
+  // Presentation.batchUpdate({ requests: requests }, presentationId);
 }
