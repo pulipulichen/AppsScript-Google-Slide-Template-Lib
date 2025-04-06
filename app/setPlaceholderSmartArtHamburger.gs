@@ -1,26 +1,10 @@
 function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
-  let list = parseMarkdownList(markdown)
-
   let {
-    // palette = "theme",
-    // colorReverse = false,
-    // colorInvert = true
-    color = {}
-  } = config
+    layoutConfig, 
+    colorConfig
+  } = setPlaceholderSmartArtHamburgerConfig(config)
 
-  if (typeof(color) === 'string') {
-    color = {
-      palette: color
-    }
-  }
-
-  let colorConfig = {
-    palette: 'theme', 
-    reverse: false, 
-    sequential: false,
-    invert: true,
-    ...color
-  }
+  let list = parseMarkdownList(markdown)
 
   // ===========================
 
@@ -34,7 +18,10 @@ function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
   const shapeHeight = shapeVerticalMargin * 2
 
   const shapeHorizontalMargin = containerWidth / 10 / (count - 1)
-  const shapeWidth =  containerWidth * 0.9
+  let shapeWidth = containerWidth
+  if (layoutConfig.direction !== '82') {
+    shapeWidth =  shapeWidth * 0.9
+  }
 
   let slide = shape.getParentPage();
 
@@ -48,7 +35,14 @@ function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
     let {type, text, level} = list[i]
 
     const top = containerTop + ((i * (shapeVerticalMargin + shapeHeight)))
-    const left = containerLeft + ((i * (shapeHorizontalMargin)))
+    
+    let left = containerLeft
+    if (layoutConfig.direction === '73') {
+      left = left + ((i * (shapeHorizontalMargin)))
+    }
+    else if (layoutConfig.direction === '91') {
+      left = left + (((list.length - i - 1) * (shapeHorizontalMargin)))
+    } 
 
     // const itemShape = slide.insertShape(SlidesApp.ShapeType.ROUND_RECTANGLE, left, top, shapeWidth, shapeHeight);
     const itemShape = slide.insertShape(sourceShape)
@@ -108,4 +102,50 @@ function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
 
   // const Presentation = Slides.Presentations
   // Presentation.batchUpdate({ requests: requests }, presentationId);
+}
+
+function setPlaceholderSmartArtHamburgerConfig(config) {
+
+  let {
+    // palette = "theme",
+    // colorReverse = false,
+    // colorInvert = true
+    layout = {},
+    color = {}
+  } = config
+
+
+  // ===========================
+
+  if (typeof(layout) === 'string') {
+    layout = {
+      direction: layout
+    }
+  }
+
+  let layoutConfig = {
+    direction: '73', 
+    ...layout
+  }
+
+  // ===========================
+
+  if (typeof(color) === 'string') {
+    color = {
+      palette: color
+    }
+  }
+
+  let colorConfig = {
+    palette: 'theme', 
+    reverse: false, 
+    sequential: false,
+    invert: true,
+    ...color
+  }
+
+  return {
+    layoutConfig, 
+    colorConfig
+  }
 }
