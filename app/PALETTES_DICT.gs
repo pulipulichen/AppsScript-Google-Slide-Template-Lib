@@ -2,12 +2,12 @@
 // https://www.heavy.ai/blog/12-color-palettes-for-telling-better-stories-with-your-data
 PALETTES_DICT = {
   'theme': [
-    {"foreground": "SlidesApp.ThemeColorType.ACCENT1", "background": "#FFFFFF"},
-    {"foreground": "SlidesApp.ThemeColorType.ACCENT2", "background": "#FFFFFF"},
-    {"foreground": "SlidesApp.ThemeColorType.ACCENT3", "background": "#FFFFFF"},
-    {"foreground": "SlidesApp.ThemeColorType.ACCENT4", "background": "#FFFFFF"},
-    {"foreground": "SlidesApp.ThemeColorType.ACCENT5", "background": "#FFFFFF"},
-    {"foreground": "SlidesApp.ThemeColorType.ACCENT6", "background": "#FFFFFF"}
+    {"foreground": SlidesApp.ThemeColorType.ACCENT1, "background": "#FFFFFF"},
+    {"foreground": SlidesApp.ThemeColorType.ACCENT2, "background": "#FFFFFF"},
+    {"foreground": SlidesApp.ThemeColorType.ACCENT3, "background": "#FFFFFF"},
+    {"foreground": SlidesApp.ThemeColorType.ACCENT4, "background": "#FFFFFF"},
+    {"foreground": SlidesApp.ThemeColorType.ACCENT5, "background": "#FFFFFF"},
+    {"foreground": SlidesApp.ThemeColorType.ACCENT6, "background": "#FFFFFF"}
   ],
   'Retro Metro': [
     {"foreground": "#ea5545", "background": "#000000"},

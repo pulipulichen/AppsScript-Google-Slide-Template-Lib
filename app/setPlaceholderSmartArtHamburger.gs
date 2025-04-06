@@ -211,10 +211,10 @@ function setPlaceholderSmartArtHamburgerItemShapeText(shape, text, color) {
     fontSize = shape.getHeight() / 3
   }
   else if (linesCount == 2) {
-    fontSize = shape.getHeight() / 4
+    fontSize = shape.getHeight() / 3.5
   }
   else {
-    fontSize = shape.getHeight() / 5
+    fontSize = shape.getHeight() / 4
   }
 
   let textRange = shape.getText()

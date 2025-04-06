@@ -4,14 +4,15 @@
  * @returns {color: "red"}
  */
 function parseCodeConfig(line) {
-  const regex = /({[\s\S]*?})/;
-  const match = line.match(regex);
-
-  if (match && match[1]) {
+  
+  let startPos = line.indexOf('{')
+  let endPos = line.lastIndexOf('}')
+  Logger.log({startPos, endPos})
+  if (startPos > 4 && endPos > (startPos + 2)) {
     try {
       return {
         type: line.slice(line.indexOf('`') + 1, line.indexOf('{')).trim(),
-        config: JSON.parse(match[1])
+        config: JSON.parse(line.slice(startPos, endPos + 1))
       }
     } catch (e) {
       // 如果 JSON 解析失敗，則返回 null 或拋出錯誤，具體取決於需求

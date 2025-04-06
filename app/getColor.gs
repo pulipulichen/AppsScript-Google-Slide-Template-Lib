@@ -14,7 +14,11 @@ function getColor(index = 0, config = {}) {
     invert = false
   } = config
 
-  palette = PALETTES_DICT[palette]
+  Logger.log(config)
+
+  palette = [
+    ...PALETTES_DICT[palette]
+  ]
 
   if (!palette) {
     palette = PALETTES_DICT.theme
