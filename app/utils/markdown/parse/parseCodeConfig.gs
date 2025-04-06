@@ -7,7 +7,7 @@ function parseCodeConfig(line) {
   
   let startPos = line.indexOf('{')
   let endPos = line.lastIndexOf('}')
-  Logger.log({startPos, endPos})
+  // Logger.log({startPos, endPos})
   if (startPos > 4 && endPos > (startPos + 2)) {
     try {
       return {

@@ -55,7 +55,7 @@ function detectLayout(elements, config = {}) {
   }
 
   if (!LAYOUT_PLACEHOLDER_MAP_CACHE[typesKey]) {
-    Logger.log('重找:' + typesKey)
+    // Logger.log('重找:' + typesKey)
     loadLayoutCache(config)
   }
 

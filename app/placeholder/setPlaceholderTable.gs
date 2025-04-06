@@ -10,7 +10,7 @@ function setPlaceholderTable (shape, tableMarkdown) {
   try {
     // 解析 Markdown 表格
     const tableData = parseMarkdownTable(tableMarkdown);
-    Logger.log(tableData)
+    // Logger.log(tableData)
 
     if (!tableData) {
       console.error('無法解析 Markdown 表格');

@@ -14,7 +14,7 @@ function getColor(index = 0, config = {}) {
     invert = false
   } = config
 
-  Logger.log(config)
+  // Logger.log(config)
 
   palette = [
     ...PALETTES_DICT[palette]

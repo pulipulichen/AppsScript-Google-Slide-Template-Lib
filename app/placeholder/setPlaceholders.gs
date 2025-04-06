@@ -18,7 +18,7 @@ function setPlaceholders(sortedPlaceholders, types, config) {
       }
 
       if (type == 'TITLE' || type == 'SUBTITLE') {
-        Logger.log(`${type} | text: ${text}`)
+        // Logger.log(`${type} | text: ${text}`)
         object.getText().setText(text);
       }
       else if (type == 'BODY') {
