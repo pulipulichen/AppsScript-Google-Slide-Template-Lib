@@ -4,7 +4,7 @@ function setPlaceholderSmartArt(shape, markdown) {
   }
 
   let firstLine = markdown.slice(0, markdown.indexOf('\n')).trim()
-  let {type, config} = firstLine.slice(firstLine.indexOf('`') + 1).trim()
+  let {type, config} = parseCodeConfig(firstLine)
 
   let code = markdown.slice(markdown.indexOf('\n') + 1, markdown.lastIndexOf('\n'))
   if (type === 'smartart:td') {

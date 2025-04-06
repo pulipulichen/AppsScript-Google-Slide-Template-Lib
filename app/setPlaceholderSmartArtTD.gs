@@ -1,24 +1,10 @@
 function setPlaceholderSmartArtTD(shape, markdown, config = {}) {
   let list = parseMarkdownList(markdown)
-  // Logger.log(list)
 
-  // let textRange = shape.getText()
-  
-  // textRange.setText(markdown)
-
-  // let textStyle = textRange.getTextStyle()
-  // textStyle.setFontFamily('Consolas')
-  // textStyle.setForegroundColor(SlidesApp.ThemeColorType.DARK2)
-
-  // let paragraphStyle = textRange.getParagraphStyle()
-  // paragraphStyle.setParagraphAlignment(SlidesApp.ParagraphAlignment.CENTER)
-
-  // shape.getFill().setSolidFill(SlidesApp.ThemeColorType.LIGHT2)
-  // let border = shape.getBorder()
-  // border.setWeight(parseInt(textStyle.getFontSize() / 10))
-  // border.setDashStyle(SlidesApp.DashStyle.SOLID)
-  // border.getLineFill().setSolidFill(SlidesApp.ThemeColorType.DARK2)
-  // shape.setContentAlignment(SlidesApp.ContentAlignment.MIDDLE)
+  let {
+    palette = "theme",
+    colorReverse = false,
+  } = config
 
   const containerWidth = shape.getWidth()
   const containerHeight = shape.getHeight()
@@ -64,7 +50,8 @@ function setPlaceholderSmartArtTD(shape, markdown, config = {}) {
     textStyle.setForegroundColor("#FFFFFF")
 
     let fill = itemShape.getFill()
-    fill.setSolidFill(SlidesApp.ThemeColorType["ACCENT" + ((i%6) + 1)])
+    let color = getColor((i / (list.length - 1)), palette, colorReverse, false)
+    fill.setSolidFill(color)
     
     let border = itemShape.getBorder()
     border.setWeight(fontSize / 10)
