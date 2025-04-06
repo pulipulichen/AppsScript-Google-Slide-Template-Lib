@@ -50,13 +50,6 @@ function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
       left = left + (((list.length - i - 1) * (shapeHorizontalMargin)))
     } 
 
-    // const itemShape = slide.insertShape(SlidesApp.ShapeType.ROUND_RECTANGLE, left, top, shapeWidth, shapeHeight);
-    // const itemShape = slide.insertShape(sourceShape)
-    // itemShape.setLeft(left)
-    // itemShape.setTop(top)
-    // itemShape.setWidth(shapeWidth)
-    // itemShape.setHeight(shapeHeight)
-
     let progress = (i / (list.length - 1))
 
     if (type === 'bullet' && !title && !picture) {
@@ -70,6 +63,10 @@ function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
     else if (type === 'bullet' && title && !picture) {
       let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
       setPlaceholderSmartArtHamburgerItemShapeHeaderText(slide, itemShape, progress, i, title, subtitle, colorConfig, layoutConfig, titleLength)
+    }
+    else if (type === 'number' && title && !picture) {
+      let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
+      setPlaceholderSmartArtHamburgerItemShapeNumberHeaderText(slide, itemShape, progress, i, title, subtitle, colorConfig, layoutConfig, titleLength)
     }
   }
 
