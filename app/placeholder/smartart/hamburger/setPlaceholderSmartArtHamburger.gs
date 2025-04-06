@@ -60,6 +60,14 @@ function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
       let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
       setPlaceholderSmartArtHamburgerItemShapePictureCenter(slide, itemShape, progress, picture, text, colorConfig, layoutConfig)
     }
+    else if (type === 'number' && !title && picture) {
+      let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
+      setPlaceholderSmartArtHamburgerItemShapeNumberPictureCenter(slide, itemShape, progress, i, picture, text, colorConfig, layoutConfig)
+    }
+    else if (type === 'number' && title && picture) {
+      let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
+      setPlaceholderSmartArtHamburgerItemShapeNumberPictureHeaderText(slide, itemShape, progress, i, picture, title, subtitle, colorConfig, layoutConfig, titleLength)
+    }
     else if (type === 'number' && !title && !picture) {
       let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
       setPlaceholderSmartArtHamburgerItemShapeNumberCenter(slide, itemShape, progress, i, text, colorConfig, layoutConfig)
@@ -73,7 +81,6 @@ function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
       setPlaceholderSmartArtHamburgerItemShapeNumberHeaderText(slide, itemShape, progress, i, title, subtitle, colorConfig, layoutConfig, titleLength)
     }
   }
-
 
   shape.sendToBack()
 }

@@ -1,4 +1,4 @@
-function setPlaceholderSmartArtHamburgerItemShapePictureCenter(slide, itemShape, progress, picture, text, colorConfig, layoutConfig) {
+function setPlaceholderSmartArtHamburgerItemShapeNumberPictureCenter(slide, itemShape, progress, i, picture, text, colorConfig, layoutConfig) {
   let {foreground, background} = getColor(progress, colorConfig)
 
   setPlaceholderSmartArtContainer(itemShape, foreground, background)  
@@ -18,6 +18,7 @@ function setPlaceholderSmartArtHamburgerItemShapePictureCenter(slide, itemShape,
   let borderWidth = (fontSize / 10)
   let pictureSize = itemShape.getHeight() + (borderWidth)
 
+
   let pictureShape = slide.insertShape(
     SlidesApp.ShapeType.RECTANGLE,
     itemShape.getLeft() - (borderWidth / 2),
@@ -31,15 +32,29 @@ function setPlaceholderSmartArtHamburgerItemShapePictureCenter(slide, itemShape,
 
   group.push(pictureShape)
 
+
+  // =============================
+
+  let numberShape = slide.insertShape(
+    SlidesApp.ShapeType.RECTANGLE,
+    itemShape.getLeft() - (borderWidth / 2) + pictureSize,
+    itemShape.getTop(),
+    itemShape.getHeight(),
+    itemShape.getHeight()
+  )
+
+  setPlaceholderSmartArtHeader(numberShape, (i + 1), foreground, background)  
+  group.push(numberShape)
+
   // =============================
 
   // Logger.log([itemShape.getWidth(), itemShape.getHeight()])
 
   let titleShape = slide.insertShape(
     SlidesApp.ShapeType.TEXT_BOX,
-    itemShape.getLeft() - (borderWidth / 2) + pictureSize,
+    itemShape.getLeft() - (borderWidth / 2) + pictureSize + itemShape.getHeight(),
     itemShape.getTop(),
-    itemShape.getWidth() - pictureSize - (borderWidth / 4),
+    itemShape.getWidth() - itemShape.getHeight() - pictureSize - (borderWidth / 4),
     itemShape.getHeight()
   )
 
