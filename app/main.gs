@@ -21,7 +21,7 @@ function markdownToSlide(md, config = {}) {
 
     // ==================
 
-    setNotes(slide, notes)
+    setNotes(slide, notes, md)
 
     // ==================
 

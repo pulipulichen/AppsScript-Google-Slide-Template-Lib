@@ -61,17 +61,20 @@ function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
 
     if (type === 'bullet' && !title && !picture) {
       let itemShape = setPlaceholderSmartArtHamburgerInsertItemShape('ROUND_RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
-      setPlaceholderSmartArtHamburgerItemShapeCenter(slide, itemShape, progress, i, text, colorConfig)
+      setPlaceholderSmartArtHamburgerItemShapeCenter(slide, itemShape, progress, i, text, colorConfig, layoutConfig)
     }
     else if (type === 'number' && !title && !picture) {
       let itemShape = setPlaceholderSmartArtHamburgerInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
-      setPlaceholderSmartArtHamburgerItemShapeNumberCenter(slide, itemShape, progress, i, text, colorConfig)
+      setPlaceholderSmartArtHamburgerItemShapeNumberCenter(slide, itemShape, progress, i, text, colorConfig, layoutConfig)
     }
     else if (type === 'bullet' && title && !picture) {
       let itemShape = setPlaceholderSmartArtHamburgerInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
-      setPlaceholderSmartArtHamburgerItemShapeHeaderText(slide, itemShape, progress, i, title, subtitle, colorConfig, titleLength)
+      setPlaceholderSmartArtHamburgerItemShapeHeaderText(slide, itemShape, progress, i, title, subtitle, colorConfig, layoutConfig, titleLength)
     }
   }
+
+
+  shape.sendToBack()
 }
 
 function setPlaceholderSmartArtHamburgerInsertItemShape(template, slide, left, top, width, height) {
@@ -85,7 +88,7 @@ function setPlaceholderSmartArtHamburgerInsertItemShape(template, slide, left, t
 }
 
 
-function setPlaceholderSmartArtHamburgerItemShapeCenter(slide, itemShape, progress, i, text, colorConfig) {
+function setPlaceholderSmartArtHamburgerItemShapeCenter(slide, itemShape, progress, i, text, colorConfig, layoutConfig) {
   let {foreground, background} = getColor(progress, colorConfig)
 
   let textRange = itemShape.getText()
@@ -109,12 +112,30 @@ function setPlaceholderSmartArtHamburgerItemShapeCenter(slide, itemShape, progre
 
   let paragraphStyle = textRange.getParagraphStyle()
   paragraphStyle.setParagraphAlignment(SlidesApp.ParagraphAlignment.CENTER)    
+
+  if (layoutConfig.arrow === true) {
+    let arrowShape = setPlaceholderSmartArtHamburgerItemShapeArrow(slide, itemShape)
+    let subgroup = slide.group([itemShape, arrowShape])
+    subgroup.sendToBack()
+  }
 }
 
-function setPlaceholderSmartArtHamburgerItemShapeNumberCenter(slide, itemShape, progress, i, text, colorConfig) {
+function setPlaceholderSmartArtHamburgerItemShapeNumberCenter(slide, itemShape, progress, i, text, colorConfig, layoutConfig) {
   let {foreground, background} = getColor(progress, colorConfig)
 
   setPlaceholderSmartArtHamburgerItemShapeContainer(itemShape, foreground, background)  
+
+  let group = []
+
+  if (layoutConfig.arrow === false) {
+    group.push(itemShape)
+  }
+  else if (progress !== 1) {
+    let arrowShape = setPlaceholderSmartArtHamburgerItemShapeArrow(slide, itemShape)
+    let subgroup = slide.group([itemShape, arrowShape])
+    subgroup.sendToBack()
+    group.push(subgroup)
+  }
   
   // border.setDashStyle(SlidesApp.DashStyle.SOLID)
   // border.getLineFill().setSolidFill(foreground)
@@ -131,6 +152,7 @@ function setPlaceholderSmartArtHamburgerItemShapeNumberCenter(slide, itemShape, 
   )
 
   setPlaceholderSmartArtHamburgerItemShapeHeader(numberShape, (i + 1), foreground, background)  
+  group.push(numberShape)
 
   // =============================
 
@@ -145,6 +167,9 @@ function setPlaceholderSmartArtHamburgerItemShapeNumberCenter(slide, itemShape, 
   )
 
   setPlaceholderSmartArtHamburgerItemShapeTitle(titleShape, text, background)
+  group.push(titleShape)
+
+  slide.group(group).sendToBack()
 }
 
 function setPlaceholderSmartArtHamburgerItemShapeContainer(itemShape, foreground, background) {
@@ -156,6 +181,42 @@ function setPlaceholderSmartArtHamburgerItemShapeContainer(itemShape, foreground
   border.setWeight(fontSize / 10)
   border.setDashStyle(SlidesApp.DashStyle.SOLID)
   border.getLineFill().setSolidFill(background)
+}
+
+function setPlaceholderSmartArtHamburgerItemShapeArrow(slide, itemShape, color) {
+  
+  if (!color) {
+    color = SlidesApp.ThemeColorType.DARK2
+  }
+
+  itemShape.sendToBack()
+
+  let fontSize = itemShape.getHeight() / 2
+
+  let arrowSize = itemShape.getHeight() / 1.5
+  let arrowLeft = itemShape.getLeft() + (itemShape.getWidth() / 2) - (arrowSize / 2)
+  let arrowTop = itemShape.getTop() + itemShape.getHeight() - (arrowSize / 2) + (fontSize / 5)
+
+  let arrowShape = slide.insertShape(
+    SlidesApp.ShapeType.HALF_FRAME,
+    arrowLeft,
+    arrowTop,
+    arrowSize,
+    arrowSize,
+  )
+
+  arrowShape.setRotation(225)
+
+  let fill = arrowShape.getFill()
+  fill.setSolidFill(color)
+
+  let border = arrowShape.getBorder()
+  
+  border.setWeight(fontSize / 10)
+  border.setDashStyle(SlidesApp.DashStyle.SOLID)
+  border.getLineFill().setSolidFill('#FFFFFF')
+
+  return arrowShape
 }
 
 function setPlaceholderSmartArtHamburgerItemShapeHeader(shape, text, foreground, background) {
@@ -246,11 +307,27 @@ function setPlaceholderSmartArtHamburgerItemShapeText(shape, text, color) {
 
 }
 
-function setPlaceholderSmartArtHamburgerItemShapeHeaderText(slide, itemShape, progress, i, title, subtitle, colorConfig, titleLength) {
+function setPlaceholderSmartArtHamburgerItemShapeHeaderText(slide, itemShape, progress, i, title, subtitle, colorConfig, layoutConfig, titleLength) {
   let {foreground, background} = getColor(progress, colorConfig)
 
-  setPlaceholderSmartArtHamburgerItemShapeContainer(itemShape, foreground, background)  
+  setPlaceholderSmartArtHamburgerItemShapeContainer(itemShape, foreground, background, layoutConfig)
   
+  let group = []
+
+  if (layoutConfig.arrow === false) {
+    group.push(itemShape)
+  }
+  else if (progress !== 1) {
+    let arrowShape = setPlaceholderSmartArtHamburgerItemShapeArrow(slide, itemShape)
+    let subgroup = slide.group([itemShape, arrowShape])
+    subgroup.sendToBack()
+    group.push(subgroup)
+  }
+  else {
+    itemShape.sendToBack()
+    group.push(itemShape)
+  }
+
   // border.setDashStyle(SlidesApp.DashStyle.SOLID)
   // border.getLineFill().setSolidFill(foreground)
 
@@ -268,6 +345,7 @@ function setPlaceholderSmartArtHamburgerItemShapeHeaderText(slide, itemShape, pr
   )
 
   setPlaceholderSmartArtHamburgerItemShapeHeader(headerShape, title, foreground, background)  
+  group.push(headerShape)
 
   // =============================
 
@@ -287,6 +365,10 @@ function setPlaceholderSmartArtHamburgerItemShapeHeaderText(slide, itemShape, pr
   }
 
   setPlaceholderSmartArtHamburgerItemShapeText(textShape, subtitle, textColor)
+  group.push(textShape)
+
+  slide.group(group).sendToBack()
+
 }
 
 function setPlaceholderSmartArtHamburgerConfig(config) {
@@ -310,6 +392,7 @@ function setPlaceholderSmartArtHamburgerConfig(config) {
 
   let layoutConfig = {
     direction: '73', 
+    arrow: false,
     ...layout
   }
 
