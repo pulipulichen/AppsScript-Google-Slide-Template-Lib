@@ -31,9 +31,9 @@ function parseMarkdownList(markdown) {
             indentStack.length = level + 1;
         }
 
-        let {title, subtitle} = parseMarkdownListItemTitle(text)
+        let {title, subtitle, picture} = parseMarkdownListItemTitle(text)
 
-        result.push({ level, text, type, title, subtitle });
+        result.push({ level, text, type, title, subtitle, picture });
     }
 
     return result;
@@ -53,5 +53,11 @@ function parseMarkdownListItemTitle(text) {
         subtitle = text.slice(pos + 1).trim()
     }
 
-    return {title, subtitle}
+    let picture
+    try {
+        picture = text.match(/!\[.*?\]\((.*?)\)/)[1];
+    }
+    catch (e) {}
+
+    return {title, subtitle, picture}
 }

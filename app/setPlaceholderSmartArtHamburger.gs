@@ -27,12 +27,10 @@ function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
 
   // Logger.log(SlidesApp.ThemeColorType.DARK2)
 
-  let sourceShape = getTemplatePageElement('SHAPE_SHADOW')
   
 
-
   for (let i = 0; i < list.length; i++) {
-    let {type, text, level} = list[i]
+    let {level, text, type, title, subtitle, picture} = list[i]
 
     const top = containerTop + ((i * (shapeVerticalMargin + shapeHeight)))
     
@@ -45,63 +43,147 @@ function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
     } 
 
     // const itemShape = slide.insertShape(SlidesApp.ShapeType.ROUND_RECTANGLE, left, top, shapeWidth, shapeHeight);
-    const itemShape = slide.insertShape(sourceShape)
-    itemShape.setLeft(left)
-    itemShape.setTop(top)
-    itemShape.setWidth(shapeWidth)
-    itemShape.setHeight(shapeHeight)
+    // const itemShape = slide.insertShape(sourceShape)
+    // itemShape.setLeft(left)
+    // itemShape.setTop(top)
+    // itemShape.setWidth(shapeWidth)
+    // itemShape.setHeight(shapeHeight)
 
-    let textRange = itemShape.getText()
-    textRange.clear()
-    textRange.setText(text);
+    let progress = (i / (list.length - 1))
 
-    let fontSize = shapeHeight / 2
-
-    let textStyle = textRange.getTextStyle()
-    textStyle.setFontSize(fontSize); // 可選：設字體大小
-    
-
-    let fill = itemShape.getFill()
-    let {foreground, background} = getColor((i / (list.length - 1)), colorConfig)
-    fill.setSolidFill(background)
-    
-    let border = itemShape.getBorder()
-    border.setWeight(fontSize / 10)
-    border.setDashStyle(SlidesApp.DashStyle.SOLID)
-    border.getLineFill().setSolidFill(foreground)
-    textStyle.setForegroundColor(foreground)
-
-    let paragraphStyle = textRange.getParagraphStyle()
-    paragraphStyle.setParagraphAlignment(SlidesApp.ParagraphAlignment.CENTER)    
+    if (type === 'bullet' && !title && !picture) {
+      let itemShape = setPlaceholderSmartArtHamburgerInsertItemShape('ROUND_RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
+      setPlaceholderSmartArtHamburgerItemShapeCenter(slide, itemShape, progress, i, text, colorConfig)
+    }
+    if (type === 'number' && !title && !picture) {
+      let itemShape = setPlaceholderSmartArtHamburgerInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
+      setPlaceholderSmartArtHamburgerItemShapeNumberCenter(slide, itemShape, progress, i, text, colorConfig)
+    }
   }
+}
 
-  // const presentationId = presentationId
-  // const presentation2 = Slides.Presentations.get(presentationId);
-  // const slides = presentation2.slides;
+function setPlaceholderSmartArtHamburgerInsertItemShape(template, slide, left, top, width, height) {
+  let sourceShape = getTemplatePageElement(template)
+  const itemShape = slide.insertShape(sourceShape)
+  itemShape.setLeft(left)
+  itemShape.setTop(top)
+  itemShape.setWidth(width)
+  itemShape.setHeight(height)
+  return itemShape
+}
 
-  // const requests = []
-  // Logger.log(slides.length); // *** 新增日誌 ***
-  // slides[(slides.length - 1)].pageElements.forEach(element => {
-    
-  //   if ((element.shape?.shapeType) + '' !== 'ROUND_RECTANGLE') {
-  //     return
-  //   }
-  //   Logger.log(`  Element ID: ${element.objectId}, Type: ${element.shape?.shapeType}`);
-  //   let shapeId = element.objectId
 
-  //   requests.push({
-  //     updateShapeProperties: {
-  //       objectId: shapeId,
-  //       shapeProperties: {
-  //         shadow: 
-  //       },
-  //       fields: "contentAlignment,autofit.autofitType"
-  //     }
-  //   })
-  // });
+function setPlaceholderSmartArtHamburgerItemShapeCenter(slide, itemShape, progress, i, text, colorConfig) {
+  let {foreground, background} = getColor(progress, colorConfig)
 
-  // const Presentation = Slides.Presentations
-  // Presentation.batchUpdate({ requests: requests }, presentationId);
+  let textRange = itemShape.getText()
+  textRange.clear()
+  textRange.setText(text);
+
+  let fontSize = shapeHeight / 2
+
+  let textStyle = textRange.getTextStyle()
+  textStyle.setFontSize(fontSize); // 可選：設字體大小
+  
+
+  let fill = itemShape.getFill()
+  fill.setSolidFill(background)
+  
+  let border = itemShape.getBorder()
+  border.setWeight(fontSize / 10)
+  border.setDashStyle(SlidesApp.DashStyle.SOLID)
+  border.getLineFill().setSolidFill(foreground)
+  textStyle.setForegroundColor(foreground)
+
+  let paragraphStyle = textRange.getParagraphStyle()
+  paragraphStyle.setParagraphAlignment(SlidesApp.ParagraphAlignment.CENTER)    
+}
+
+function setPlaceholderSmartArtHamburgerItemShapeNumberCenter(slide, itemShape, progress, i, text, colorConfig) {
+  let {foreground, background} = getColor(progress, colorConfig)
+
+  itemShape.getText().clear()
+  itemShape.getFill().setSolidFill(foreground)
+
+  let fontSize = itemShape.getHeight() / 2
+  let border = itemShape.getBorder()
+  border.setWeight(fontSize / 10)
+  border.setDashStyle(SlidesApp.DashStyle.SOLID)
+  border.getLineFill().setSolidFill(background)
+  
+  // border.setDashStyle(SlidesApp.DashStyle.SOLID)
+  // border.getLineFill().setSolidFill(foreground)
+
+  // let fontSize = getFontSizeFromShape(itemShape)
+  // let numberShapeWidth = itemShape.getHeight()
+  
+  let numberShape = slide.insertShape(
+    SlidesApp.ShapeType.RECTANGLE,
+    itemShape.getLeft(),
+    itemShape.getTop(),
+    itemShape.getHeight(),
+    itemShape.getHeight()
+  )
+
+  setPlaceholderSmartArtHamburgerItemShapeHeader(numberShape, (i + 1), foreground, background)  
+
+  // =============================
+
+  Logger.log([itemShape.getWidth(), itemShape.getHeight()])
+
+  let titleShape = slide.insertShape(
+    SlidesApp.ShapeType.TEXT_BOX,
+    itemShape.getLeft() + itemShape.getHeight(),
+    itemShape.getTop(),
+    itemShape.getWidth() - itemShape.getHeight(),
+    itemShape.getHeight()
+  )
+
+  setPlaceholderSmartArtHamburgerItemShapeTitle(titleShape, text, background)
+}
+
+function setPlaceholderSmartArtHamburgerItemShapeHeader(shape, text, foreground, background) {
+  
+  let textRange = shape.getText()
+  textRange.clear()
+  textRange.setText(text);
+
+  let fontSize = shape.getHeight() / 2
+
+  let textStyle = textRange.getTextStyle()
+  textStyle.setFontSize(fontSize); // 可選：設字體大小
+
+  let fill = shape.getFill()
+  fill.setSolidFill(background)
+  
+  let border = shape.getBorder()
+  border.setWeight(fontSize / 10)
+  border.setDashStyle(SlidesApp.DashStyle.SOLID)
+  border.getLineFill().setSolidFill(background)
+
+  textStyle.setForegroundColor(foreground)
+
+  let paragraphStyle = textRange.getParagraphStyle()
+  paragraphStyle.setParagraphAlignment(SlidesApp.ParagraphAlignment.CENTER)
+  shape.setContentAlignment(SlidesApp.ContentAlignment.MIDDLE)
+}
+
+function setPlaceholderSmartArtHamburgerItemShapeTitle(shape, text, color) {
+  
+  let textRange = shape.getText()
+  textRange.clear()
+  textRange.setText(text);
+
+  let fontSize = shape.getHeight() / 2
+
+  let textStyle = textRange.getTextStyle()
+  textStyle.setFontSize(fontSize); // 可選：設字體大小
+
+  textStyle.setForegroundColor(color)
+
+  let paragraphStyle = textRange.getParagraphStyle()
+  paragraphStyle.setParagraphAlignment(SlidesApp.ParagraphAlignment.CENTER)
+  shape.setContentAlignment(SlidesApp.ContentAlignment.MIDDLE)
 }
 
 function setPlaceholderSmartArtHamburgerConfig(config) {
