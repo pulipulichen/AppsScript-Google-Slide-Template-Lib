@@ -7,10 +7,10 @@ function setPlaceholderSmartArt(shape, markdown) {
   let {type, config} = parseCodeConfig(firstLine)
 
   let code = markdown.slice(markdown.indexOf('\n') + 1, markdown.lastIndexOf('\n'))
-  if (type === 'smartart:td') {
-    setPlaceholderSmartArtTD(shape, code, config)
+  if (type === 'smartart:hamberger') {
+    setPlaceholderSmartArtHamburger(shape, code, config)
   }
   else {
-    setPlaceholderSmartArtTD(shape, code, config)
+    setPlaceholderSmartArtHamburger(shape, code, config)
   }
 }

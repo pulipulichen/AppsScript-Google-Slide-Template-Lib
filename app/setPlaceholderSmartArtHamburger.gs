@@ -1,10 +1,28 @@
-function setPlaceholderSmartArtTD(shape, markdown, config = {}) {
+function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
   let list = parseMarkdownList(markdown)
 
   let {
-    palette = "theme",
-    colorReverse = false,
+    // palette = "theme",
+    // colorReverse = false,
+    // colorInvert = true
+    color = {}
   } = config
+
+  if (typeof(color) === 'string') {
+    color = {
+      palette: color
+    }
+  }
+
+  let colorConfig = {
+    palette: 'theme', 
+    reverse: false, 
+    sequential: false,
+    invert: true,
+    ...color
+  }
+
+  // ===========================
 
   const containerWidth = shape.getWidth()
   const containerHeight = shape.getHeight()
@@ -47,16 +65,17 @@ function setPlaceholderSmartArtTD(shape, markdown, config = {}) {
 
     let textStyle = textRange.getTextStyle()
     textStyle.setFontSize(fontSize); // 可選：設字體大小
-    textStyle.setForegroundColor("#FFFFFF")
+    
 
     let fill = itemShape.getFill()
-    let color = getColor((i / (list.length - 1)), palette, colorReverse, false)
-    fill.setSolidFill(color)
+    let {foreground, background} = getColor((i / (list.length - 1)), colorConfig)
+    fill.setSolidFill(background)
     
     let border = itemShape.getBorder()
     border.setWeight(fontSize / 10)
     border.setDashStyle(SlidesApp.DashStyle.SOLID)
-    border.getLineFill().setSolidFill("#FFFFFF")
+    border.getLineFill().setSolidFill(foreground)
+    textStyle.setForegroundColor(foreground)
 
     let paragraphStyle = textRange.getParagraphStyle()
     paragraphStyle.setParagraphAlignment(SlidesApp.ParagraphAlignment.CENTER)    
