@@ -11,7 +11,7 @@ function parseMarkdownList(markdown) {
 
         const indent = match[1] || '';
         const marker = match[2];
-        const text = match[3];
+        let text = match[3];
 
         // 將 tab 換成 4 空白再算長度
         const indentLength = indent.replace(/\t/g, '    ').length;
@@ -31,7 +31,17 @@ function parseMarkdownList(markdown) {
             indentStack.length = level + 1;
         }
 
-        let {title, subtitle, picture} = parseMarkdownListItemTitle(text)
+        let picture
+        try {
+            picture = text.match(/!\[.*?\]\((.*?)\)/)[1];        
+            text = text.replace(/!\[.*?\]\(.*?\)/g, '')
+        }
+        catch (e) {
+            // Logger.log('沒有圖片：' + e)
+        }
+
+
+        let {title, subtitle} = parseMarkdownListItemTitle(text)
 
         result.push({ level, text, type, title, subtitle, picture });
     }
@@ -40,6 +50,7 @@ function parseMarkdownList(markdown) {
 }
 
 function parseMarkdownListItemTitle(text) {
+    
     // 分析標題
     let title, subtitle
 
@@ -53,11 +64,5 @@ function parseMarkdownListItemTitle(text) {
         subtitle = text.slice(pos + 1).trim()
     }
 
-    let picture
-    try {
-        picture = text.match(/!\[.*?\]\((.*?)\)/)[1];
-    }
-    catch (e) {}
-
-    return {title, subtitle, picture}
+    return {title, subtitle}
 }

@@ -5,7 +5,7 @@ function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
   } = setPlaceholderSmartArtHamburgerConfig(config)
 
   let list = parseMarkdownListTree(markdown)
-  // Logger.log(list)
+  Logger.log({list})
 
   // ===========================
 
@@ -56,6 +56,10 @@ function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
       let itemShape = setPlaceholderSmartArtInsertItemShape('ROUND_RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
       setPlaceholderSmartArtHamburgerItemShapeCenter(slide, itemShape, progress, i, text, colorConfig, layoutConfig)
     }
+    else if (type === 'bullet' && !title && picture) {
+      let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
+      setPlaceholderSmartArtHamburgerItemShapePictureCenter(slide, itemShape, progress, picture, text, colorConfig, layoutConfig)
+    }
     else if (type === 'number' && !title && !picture) {
       let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
       setPlaceholderSmartArtHamburgerItemShapeNumberCenter(slide, itemShape, progress, i, text, colorConfig, layoutConfig)
@@ -73,10 +77,3 @@ function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
 
   shape.sendToBack()
 }
-
-
-
-
-
-
-
