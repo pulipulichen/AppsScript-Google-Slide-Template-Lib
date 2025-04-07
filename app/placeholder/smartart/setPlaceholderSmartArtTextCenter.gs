@@ -1,15 +1,16 @@
-function setPlaceholderSmartArtText(fontSize, shape, text, color) {
+function setPlaceholderSmartArtTextCenter(fontSize, shape, text, color) {
   
   let lines = text.trim().split('\n')
   let linesCount = lines.length
 
-  let baseSize = Math.min(shape.getHeight(), shape.getWidth())
-  if (linesCount == 2) {
-    fontSize = fontSize / 1.5
-  }
-  else if (linesCount > 2) {
-    fontSize = fontSize / 4
-  }
+  // let baseSize = Math.min(shape.getHeight(), shape.getWidth())
+  // if (linesCount == 2) {
+  //   fontSize = fontSize / 1.5
+  // }
+  // else if (linesCount > 2) {
+  //   fontSize = fontSize / 2
+  // }
+  fontSize = fontSize / 1.5
 
   let textRange = shape.getText()
   textRange.clear()
@@ -35,7 +36,7 @@ function setPlaceholderSmartArtText(fontSize, shape, text, color) {
   textStyle.setForegroundColor(color)
 
   let paragraphStyle = textRange.getParagraphStyle()
-  paragraphStyle.setParagraphAlignment(SlidesApp.ParagraphAlignment.START)
-  shape.setContentAlignment(SlidesApp.ContentAlignment.MIDDLE)
+  paragraphStyle.setParagraphAlignment(SlidesApp.ParagraphAlignment.CENTER)
+  shape.setContentAlignment(SlidesApp.ContentAlignment.TOP)
 
 }

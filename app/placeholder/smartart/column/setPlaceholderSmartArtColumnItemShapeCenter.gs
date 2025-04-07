@@ -26,7 +26,7 @@ function setPlaceholderSmartArtColumnItemShapeCenter(slide, itemShape, progress,
   // =================================
 
   if (layoutConfig.arrow === true && progress < 1) {
-    let arrowShape = setPlaceholderSmartArtArrowRight(slide, itemShape)
+    let arrowShape = setPlaceholderSmartArtArrowRight(fontSize, slide, itemShape)
     let subgroup = slide.group([itemShape, arrowShape])
     subgroup.sendToBack()
   }

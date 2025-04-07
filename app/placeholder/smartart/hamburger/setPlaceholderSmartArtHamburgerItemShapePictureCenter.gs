@@ -6,7 +6,7 @@ function setPlaceholderSmartArtHamburgerItemShapePictureCenter(slide, itemShape,
   let group = []
 
   group.push(itemShape)
-  
+  let fontSize = setPlaceholderSmartArtHamburgerFontSize(itemShape.getHeight())
   
   // border.setDashStyle(SlidesApp.DashStyle.SOLID)
   // border.getLineFill().setSolidFill(foreground)
@@ -14,7 +14,6 @@ function setPlaceholderSmartArtHamburgerItemShapePictureCenter(slide, itemShape,
   // let fontSize = getFontSizeFromShape(itemShape)
   // let numberShapeWidth = itemShape.getHeight()
   
-  let fontSize = itemShape.getHeight() / 2
   let borderWidth = (fontSize / 10)
   let pictureSize = itemShape.getHeight() + (borderWidth)
 
@@ -43,13 +42,13 @@ function setPlaceholderSmartArtHamburgerItemShapePictureCenter(slide, itemShape,
     itemShape.getHeight()
   )
 
-  setPlaceholderSmartArtTitle(titleShape, text, background)
+  setPlaceholderSmartArtTitle(fontSize, titleShape, text, background)
   
   if (layoutConfig.arrow === false || progress === 1) {
     group.push(titleShape)
   }
   else if (progress !== 1) {
-    let arrowShape = setPlaceholderSmartArtArrowBelow(slide, titleShape)
+    let arrowShape = setPlaceholderSmartArtArrowBelow(fontSize, slide, titleShape)
     let subgroup = slide.group([titleShape, arrowShape])
     group.push(subgroup) 
   }

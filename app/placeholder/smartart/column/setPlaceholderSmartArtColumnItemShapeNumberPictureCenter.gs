@@ -4,6 +4,7 @@ function setPlaceholderSmartArtColumnItemShapeNumberPictureCenter(slide, itemSha
   setPlaceholderSmartArtContainer(itemShape, foreground, background)  
 
   let group = []
+  let fontSize = setPlaceholderSmartArtColumnFontSize(itemShape)
 
   // ==========================================
 
@@ -11,7 +12,7 @@ function setPlaceholderSmartArtColumnItemShapeNumberPictureCenter(slide, itemSha
     group.push(itemShape)
   }
   else if (progress !== 1) {
-    let arrowShape = setPlaceholderSmartArtArrowRight(slide, itemShape)
+    let arrowShape = setPlaceholderSmartArtArrowRight(fontSize, slide, itemShape)
     let subgroup = slide.group([itemShape, arrowShape])
     group.push(subgroup) 
   }
@@ -24,7 +25,7 @@ function setPlaceholderSmartArtColumnItemShapeNumberPictureCenter(slide, itemSha
   // let fontSize = getFontSizeFromShape(itemShape)
   // let numberShapeWidth = itemShape.getHeight()
   
-  let fontSize = setPlaceholderSmartArtColumnFontSize(itemShape)
+  
   let baseSize = Math.min(itemShape.getHeight(), itemShape.getWidth())
 
   let baseTop = itemShape.getTop()
@@ -52,7 +53,7 @@ function setPlaceholderSmartArtColumnItemShapeNumberPictureCenter(slide, itemSha
 
   // =============================
 
-  let numberShapeHeight = itemShape.getWidth() / 3
+  let numberShapeHeight = baseSize / 3
 
   let numberShape = slide.insertShape(
     SlidesApp.ShapeType.RECTANGLE,
@@ -62,7 +63,7 @@ function setPlaceholderSmartArtColumnItemShapeNumberPictureCenter(slide, itemSha
     numberShapeHeight
   )
 
-  setPlaceholderSmartArtHeader(numberShape, (i + 1), foreground, background)  
+  setPlaceholderSmartArtHeader(fontSize, numberShape, (i + 1), foreground, background)  
   group.push(numberShape)
 
   baseTop = baseTop + numberShapeHeight
@@ -79,7 +80,7 @@ function setPlaceholderSmartArtColumnItemShapeNumberPictureCenter(slide, itemSha
     itemShape.getHeight() - baseTop + itemShape.getTop()
   )
 
-  setPlaceholderSmartArtTitle(titleShape, text, background)
+  setPlaceholderSmartArtTitle(fontSize, titleShape, text, background)
   group.push(titleShape)
   
   

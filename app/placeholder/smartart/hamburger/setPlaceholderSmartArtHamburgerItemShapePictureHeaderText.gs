@@ -4,6 +4,7 @@ function setPlaceholderSmartArtHamburgerItemShapePictureHeaderText(slide, itemSh
   setPlaceholderSmartArtContainer(itemShape, foreground, background)  
 
   let group = []
+  let fontSize = setPlaceholderSmartArtHamburgerFontSize(itemShape.getHeight())
 
   // ==================
   
@@ -11,7 +12,7 @@ function setPlaceholderSmartArtHamburgerItemShapePictureHeaderText(slide, itemSh
     group.push(itemShape)
   }
   else if (progress !== 1) {
-    let arrowShape = setPlaceholderSmartArtArrowBelow(slide, itemShape)
+    let arrowShape = setPlaceholderSmartArtArrowBelow(fontSize, slide, itemShape)
     let subgroup = slide.group([itemShape, arrowShape])
     subgroup.sendToBack()
     group.push(subgroup)
@@ -31,7 +32,6 @@ function setPlaceholderSmartArtHamburgerItemShapePictureHeaderText(slide, itemSh
   // let fontSize = getFontSizeFromShape(itemShape)
   // let numberShapeWidth = itemShape.getHeight()
   
-  let fontSize = itemShape.getHeight() / 2
   let borderWidth = (fontSize / 10)
   let pictureSize = itemShape.getHeight() + (borderWidth)
 
@@ -63,7 +63,7 @@ function setPlaceholderSmartArtHamburgerItemShapePictureHeaderText(slide, itemSh
     itemShape.getHeight()
   )
 
-  setPlaceholderSmartArtHeader(titleShape, title, foreground, background)  
+  setPlaceholderSmartArtHeader(fontSize, titleShape, title, foreground, background)  
   baseLeft = baseLeft + headerShapeWidth
   group.push(titleShape)
 
@@ -84,7 +84,7 @@ function setPlaceholderSmartArtHamburgerItemShapePictureHeaderText(slide, itemSh
     textColor = '#FFFFFF'
   }
 
-  setPlaceholderSmartArtText(textShape, subtitle, textColor)
+  setPlaceholderSmartArtText(fontSize, textShape, subtitle, textColor)
   group.push(textShape)
 
   // ===========================

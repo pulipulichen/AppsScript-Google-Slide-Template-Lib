@@ -4,6 +4,7 @@ function setPlaceholderSmartArtColumnItemShapePictureCenter(slide, itemShape, pr
   setPlaceholderSmartArtContainer(itemShape, foreground, background)  
 
   let group = []
+  let fontSize = setPlaceholderSmartArtColumnFontSize(itemShape)
 
   // ==========================================
 
@@ -11,7 +12,7 @@ function setPlaceholderSmartArtColumnItemShapePictureCenter(slide, itemShape, pr
     group.push(itemShape)
   }
   else if (progress !== 1) {
-    let arrowShape = setPlaceholderSmartArtArrowRight(slide, itemShape)
+    let arrowShape = setPlaceholderSmartArtArrowRight(fontSize, slide, itemShape)
     let subgroup = slide.group([itemShape, arrowShape])
     group.push(subgroup) 
   }
@@ -30,7 +31,6 @@ function setPlaceholderSmartArtColumnItemShapePictureCenter(slide, itemShape, pr
 
   
 
-  let fontSize = setPlaceholderSmartArtColumnFontSize(itemShape)
   let baseSize = Math.min(itemShape.getHeight(), itemShape.getWidth())
 
   let borderWidth = (fontSize / 10)
@@ -62,16 +62,8 @@ function setPlaceholderSmartArtColumnItemShapePictureCenter(slide, itemShape, pr
     itemShape.getHeight() - baseTop + itemShape.getTop(),
   )
 
-  setPlaceholderSmartArtTitle(titleShape, text, background)
+  setPlaceholderSmartArtTitle(fontSize, titleShape, text, background)
+  group.push(titleShape)
   
-  if (layoutConfig.arrow === false || progress === 1) {
-    group.push(titleShape)
-  }
-  else if (progress !== 1) {
-    let arrowShape = setPlaceholderSmartArtArrowRight(slide, titleShape)
-    let subgroup = slide.group([titleShape, arrowShape])
-    group.push(subgroup) 
-  }
-
   slide.group(group).sendToBack()
 }

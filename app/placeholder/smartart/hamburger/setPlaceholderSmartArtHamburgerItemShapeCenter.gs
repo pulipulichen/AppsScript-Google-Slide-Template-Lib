@@ -6,7 +6,7 @@ function setPlaceholderSmartArtHamburgerItemShapeCenter(slide, itemShape, progre
   textRange.clear()
   textRange.setText(text);
 
-  let fontSize = itemShape.getHeight() / 2
+  let fontSize = setPlaceholderSmartArtHamburgerFontSize(itemShape.getHeight())
 
   let textStyle = textRange.getTextStyle()
   textStyle.setFontSize(fontSize); // 可選：設字體大小
@@ -24,7 +24,7 @@ function setPlaceholderSmartArtHamburgerItemShapeCenter(slide, itemShape, progre
   paragraphStyle.setParagraphAlignment(SlidesApp.ParagraphAlignment.CENTER)    
 
   if (layoutConfig.arrow === true && progress < 1) {
-    let arrowShape = setPlaceholderSmartArtArrowBelow(slide, itemShape)
+    let arrowShape = setPlaceholderSmartArtArrowBelow(fontSize, slide, itemShape)
     let subgroup = slide.group([itemShape, arrowShape])
     subgroup.sendToBack()
   }

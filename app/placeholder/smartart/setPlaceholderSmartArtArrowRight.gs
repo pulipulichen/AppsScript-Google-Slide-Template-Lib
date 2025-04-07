@@ -1,4 +1,4 @@
-function setPlaceholderSmartArtArrowRight(slide, itemShape, color) {
+function setPlaceholderSmartArtArrowRight(fontSize, slide, itemShape, color) {
   
   if (!color) {
     color = SlidesApp.ThemeColorType.DARK2
@@ -6,10 +6,8 @@ function setPlaceholderSmartArtArrowRight(slide, itemShape, color) {
 
   itemShape.sendToBack()
 
-  let baseSize = Math.min(itemShape.getWidth(), itemShape.getHeight())
-
-  let fontSize = baseSize / 2
-  let arrowSize = baseSize / 1.5
+  fontSize = fontSize * 2
+  let arrowSize = fontSize * 1.5
   
   // let arrowLeft = itemShape.getLeft() + itemShape.getWidth() - (arrowSize / 2) + (fontSize / 5)
   let arrowLeft = itemShape.getLeft() + itemShape.getWidth() - (arrowSize / 2) + (fontSize / 10)
