@@ -54,6 +54,11 @@ function insertMarkdownToParagraph(paragraphRange, markdownText) {
       style.removeLink()
     }
   }
+
+  // ===============
+
+  // let paragraphStyle = paragraphRange.getParagraphStyle()
+  // paragraphStyle.setSpaceAbove(20)
 }
 
 /**

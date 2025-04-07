@@ -101,6 +101,12 @@ function loadLayoutCache(config = {}) {
       if (!LAYOUT_PLACEHOLDER_MAP_CACHE[typesKey]) {
         LAYOUT_PLACEHOLDER_MAP_CACHE[typesKey] = LAYOUT_CACHE[name]
       }
+      else {
+        let prevName = LAYOUT_PLACEHOLDER_MAP_CACHE[typesKey].getLayoutName()
+        if (prevName > name) {
+          LAYOUT_PLACEHOLDER_MAP_CACHE[typesKey] = LAYOUT_CACHE[name]
+        }
+      }
     }
   }
 

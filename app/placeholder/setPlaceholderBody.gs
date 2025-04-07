@@ -41,7 +41,22 @@ function setPlaceholderBody(shape, markdown) {
     }
   }
 
-  textRange.getListStyle().applyListPreset(SlidesApp.ListPreset.DISC_CIRCLE_SQUARE);
+  let listStype = textRange.getListStyle()
+
+  // let paragraphStyle = textRange.getParagraphStyle()
+  // paragraphStyle.setSpaceAbove(0.5)
+  // paragraphStyle.setSpaceBelow(3)
+
+  listStype.applyListPreset(SlidesApp.ListPreset.DISC_CIRCLE_SQUARE);
+
+  // let paragraphs = textRange.getListParagraphs()
+  // for (let paragraph of paragraphs) {
+  //   let paragraphStyle = paragraph.getRange().getParagraphStyle()
+  //   paragraphStyle.setSpaceBelow(10)
+  // }
+
+  
+  // Logger.log(paragraphStyle.getSpaceBelow())
 
   // if (level0Type === 'bullet') {
   //   textRange.getListStyle().applyListPreset(SlidesApp.ListPreset.DISC_CIRCLE_SQUARE);
