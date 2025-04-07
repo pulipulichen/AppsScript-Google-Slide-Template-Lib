@@ -27,9 +27,9 @@ function setPlaceholderSmartArtColumnItemShapeHeaderText(slide, itemShape, progr
 
   // =================
 
-  let headerShape = buildPlaceholderSmartArtColumnHeaderShape(baseSize, baseTop, itemShape, fontSize, text, foreground, background)
+  let headerShape = buildPlaceholderSmartArtColumnHeaderShape(slide, baseSize, baseTop, itemShape, fontSize, title, foreground, background)
   group.push(headerShape)
-  baseTop = baseTop + headerShape.getHeight
+  baseTop = baseTop + headerShape.getHeight()
 
   // =============================
 

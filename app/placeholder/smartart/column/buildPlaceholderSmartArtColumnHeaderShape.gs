@@ -1,4 +1,4 @@
-function buildPlaceholderSmartArtColumnHeaderShape(baseSize, baseTop, itemShape, fontSize, text, foreground, background) {
+function buildPlaceholderSmartArtColumnHeaderShape(slide, baseSize, baseTop, itemShape, fontSize, text, foreground, background) {
   let headerShapeHeight = baseSize
 
   let headerShape = slide.insertShape(
@@ -9,7 +9,7 @@ function buildPlaceholderSmartArtColumnHeaderShape(baseSize, baseTop, itemShape,
     headerShapeHeight
   )
 
-  setPlaceholderSmartArtHeader(fontSize, headerShape, text, foreground, background)  
+  setPlaceholderSmartArtHeader(fontSize, headerShape, text, background, foreground)  
 
   return headerShape
 }
