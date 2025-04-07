@@ -9,10 +9,10 @@ function setPlaceholderSmartArt(shape, markdown) {
   Logger.log(type)
 
   let code = markdown.slice(markdown.indexOf('\n') + 1, markdown.lastIndexOf('\n'))
-  if (type === 'smartart:hamberger') {
+  if (type === 'smartart:hamberger' || type === 'smartart:row' || type === 'smartart:rows') {
     setPlaceholderSmartArtHamburger(shape, code, config)
   }
-  else if (type === 'smartart:column') {
+  else if (type === 'smartart:column' || type === 'smartart:col' || type === 'smartart:columns') {
     setPlaceholderSmartArtColumn(shape, code, config)
   }
   else {
