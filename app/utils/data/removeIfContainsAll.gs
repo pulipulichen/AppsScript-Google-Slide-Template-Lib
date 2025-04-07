@@ -7,8 +7,10 @@ function removeIfContainsAll(array, removeItems) {
   const result = array.slice();
 
   // 對每個要移除的元素，只移除第一次出現
-  for (const item of removeItems) {
-    const index = result.indexOf(item);
+  // for (const item of removeItems) {
+  for (let i = removeItems.length - 1; i >= 0; i--) {
+    let item = removeItems[i]
+    const index = result.lastIndexOf(item);
     if (index !== -1) {
       result.splice(index, 1); // 只移除第一個出現的
     }

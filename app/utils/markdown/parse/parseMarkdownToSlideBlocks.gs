@@ -9,7 +9,7 @@ function parseMarkdownToSlideBlocks(markdown) {
     slideMarkdown = slideMarkdown.trim()
 
     let notes = []
-    if (slideMarkdown.indexOf("::: notes") > -1) {
+    if (slideMarkdown.indexOf("\n::: notes\n") > -1) {
       let startPos = slideMarkdown.indexOf('::: notes') + 9
       let endPos = slideMarkdown.indexOf(':::', startPos)
       notes = [slideMarkdown.slice(startPos, endPos).trim()]
@@ -56,9 +56,16 @@ function parseMarkdownToSlideBlocks(markdown) {
       }
       else if (trimmed.startsWith('::: cite:') || trimmed.startsWith('::: cite=') || trimmed.startsWith('::: cite ')) {
         cite = trimmed.slice(trimmed.indexOf(' cite') + 6)
+
       }
       else if (trimmed.startsWith('::: smartart')) {
         smartart = trimmed.slice(trimmed.indexOf(' smartart') + 1)
+      }
+      else if (trimmed.startsWith('::: note')) {
+        notes.push(trimmed.slice(trimmed.indexOf(' note') + 5))
+      }
+      else if (trimmed.startsWith('::: notes')) {
+        notes.push(trimmed.slice(trimmed.indexOf(' notes') + 6))
       }
       else if (line.startsWith('>')) {
         notes.push(line.slice(2))
@@ -152,21 +159,22 @@ function parseMarkdownToSlideBlocks(markdown) {
       item.cite = cite
 
       if (notes.length > 0) {
-        notes = notes.concat(['----', '\n'])  
+        notes = notes.concat(['\n----\n'])  
       }
-      notes = notes.push(cite)
+      notes.push(cite)
     }
 
     if (notes.length > 0) {
-      notes = notes.concat(['----', '\n'])  
+      notes = notes.concat(['\n----\n'])  
     }
-    notes = notes.push(slideMarkdown)
+    notes.push(slideMarkdown)
 
     if (Array.isArray(notes)) {
       notes = notes.join('\n')
     }
 
     item.notes = notes
+    // Logger.log(notes)
     
     output.push(item)
   }

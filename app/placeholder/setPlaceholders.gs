@@ -20,6 +20,10 @@ function setPlaceholders(sortedPlaceholders, types, config) {
       if (type == 'TITLE' || type == 'SUBTITLE') {
         // Logger.log(`${type} | text: ${text}`)
         object.getText().setText(text);
+
+        if (type === 'SUBTITLE') {
+          object.getText().getParagraphStyle().setParagraphAlignment(SlidesApp.ParagraphAlignment.CENTER)
+        }
       }
       else if (type == 'BODY') {
         if (isMarkdownPicture(text)) {

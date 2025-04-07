@@ -10,9 +10,17 @@ function setPlaceholderCite(sortedPlaceholders, cite) {
     // Logger.log([type, object.getPageElementType()])
     if (type == 'BODY') {
       let paragraphRange = object.getText()
+      
+      let exclude = ['link']
+      if ( (cite.startsWith('https://') || cite.startsWith('http://')) && cite.length < 50 ) {
+        cite = `[${cite}](${cite})`
+        exclude = []
+      }
+
       insertMarkdownToParagraph(paragraphRange, cite, {
-        exclude: ['link']
+        exclude
       })
+
       return true
     }
   }

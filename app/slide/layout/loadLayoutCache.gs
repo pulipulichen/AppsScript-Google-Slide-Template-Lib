@@ -1,87 +1,6 @@
 let LAYOUT_CACHE = null
 let LAYOUT_PLACEHOLDER_MAP_CACHE = null
 
-function findLayout(layoutName) {
-  if (!LAYOUT_CACHE) {
-    loadLayoutCache()
-  }
-
-  if (!layoutName) {
-    return LAYOUT_CACHE['TITLE_AND_BODY']
-  }
-
-  if (LAYOUT_DICT[layoutName]) {
-    let layoutNameList = LAYOUT_DICT[layoutName]
-
-    if (Array.isArray(layoutName) === false) {
-      layoutNameList = [layoutNameList]
-    }
-
-    for (let name of layoutNameList) {
-      if (LAYOUT_CACHE[name]) {
-        return LAYOUT_CACHE[name]
-      }
-    }
-  }
-
-
-  if (!LAYOUT_CACHE[layoutName]) {
-    loadLayoutCache()
-  }
-
-
-  if (!LAYOUT_CACHE[layoutName]) {
-    if (LAYOUT_CACHE['TITLE_AND_BODY']) {
-      return LAYOUT_CACHE['TITLE_AND_BODY']
-    }
-    else if (LAYOUT_CACHE['TITLE_AND_BODY_1']) {
-      return LAYOUT_CACHE['TITLE_AND_BODY_1']
-    } 
-  }
-  
-  return LAYOUT_CACHE[layoutName]
-}
-
-function detectLayout(elements, config = {}) {
-  if (!elements) {
-    return findLayout('BLANK')
-  }
-  
-  if (!Array.isArray(elements)) {
-    elements = [elements]
-  }
-
-  let types = elements.map((e) => {
-    let type = e.type
-    if (!type) {
-      type = 'TITLE'
-    }
-    return type
-  })
-  
-  // types.sort((a, b) => b.localeCompare(a))
-
-  let typesKey = types.join(',')
-  // Logger.log('來找:' + typesKey)
-
-  // =================
-
-  if (!LAYOUT_PLACEHOLDER_MAP_CACHE) {
-    loadLayoutCache(config)
-  }
-
-  if (!LAYOUT_PLACEHOLDER_MAP_CACHE[typesKey]) {
-    // Logger.log('重找:' + typesKey)
-    loadLayoutCache(config)
-  }
-
-  if (!LAYOUT_PLACEHOLDER_MAP_CACHE[typesKey]) {
-    return findLayout()
-  }
-  
-  return LAYOUT_PLACEHOLDER_MAP_CACHE[typesKey]
-}
-
 function loadLayoutCache(config = {}) {
   let {excludeElements = []} = config
 
@@ -133,10 +52,4 @@ function loadLayoutCache(config = {}) {
   // Logger.log(Object.keys(LAYOUT_PLACEHOLDER_MAP_CACHE).map(key => {
     // return `${key} - ${LAYOUT_PLACEHOLDER_MAP_CACHE[key].getLayoutName()}`
   // }).join('\n'))
-}
-
-function getLayoutsList () {
-  loadLayoutCache()
-
-  return LAYOUT_CACHE
 }
