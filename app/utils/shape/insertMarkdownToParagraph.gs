@@ -1,11 +1,20 @@
-function insertMarkdownToParagraph(paragraphRange, markdownText) {
+function insertMarkdownToParagraph(paragraphRange, markdownText, config = {}) {
   // 將 Markdown 轉成格式分段
   const tokens = tokenizeMarkdown(markdownText);
 
+  const {
+    exclude = []
+  } = config
+
   
   for (const token of tokens) {
+    if (token.link && exclude.includes('link')) {
+      continue
+    }
+
     const textRange = paragraphRange.appendText(token.text);
     // Logger.log(token)
+
 
     const style = textRange.getTextStyle()
     

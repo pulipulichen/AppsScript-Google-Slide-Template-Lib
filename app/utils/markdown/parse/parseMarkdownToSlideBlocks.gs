@@ -4,21 +4,18 @@ function parseMarkdownToSlideBlocks(markdown) {
   const slidesMarkdown = markdown.split('\n----\n'); 
   const output = []
 
-  for (let slideMarkdown of slidesMarkdown) {
+  for (let i = 0; i < slidesMarkdown.length; i++) {
+    let slideMarkdown = slidesMarkdown[i]
     slideMarkdown = slideMarkdown.trim()
 
-    let notes = null
+    let notes = []
     if (slideMarkdown.indexOf("::: notes") > -1) {
       let startPos = slideMarkdown.indexOf('::: notes') + 9
       let endPos = slideMarkdown.indexOf(':::', startPos)
-      notes = slideMarkdown.slice(startPos, endPos).trim()
+      notes = [slideMarkdown.slice(startPos, endPos).trim()]
       slideMarkdown = slideMarkdown.slice(0 , startPos - 9) + slideMarkdown.slice(endPos + 3)
     }
     
-    if (!notes) {
-      notes = []
-    }
-
     const lines = slideMarkdown.split('\n');
     let layout = null
     let cite = null
@@ -128,16 +125,27 @@ function parseMarkdownToSlideBlocks(markdown) {
     if (layout) {
       item.layout = layout
     }
-    if (notes) {
-      if (Array.isArray(notes)) {
-        notes = notes.join('\n')
-      }
-      item.notes = notes
-    }
+
     if (cite) {
       item.cite = cite
+
+      if (notes.length > 0) {
+        notes = notes.concat(['----', '\n'])  
+      }
+      notes = notes.push(cite)
     }
 
+    if (notes.length > 0) {
+      notes = notes.concat(['----', '\n'])  
+    }
+    notes = notes.push(slideMarkdown)
+
+    if (Array.isArray(notes)) {
+      notes = notes.join('\n')
+    }
+
+    item.notes = notes
+    
     output.push(item)
   }
   

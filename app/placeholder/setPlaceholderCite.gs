@@ -10,7 +10,9 @@ function setPlaceholderCite(sortedPlaceholders, cite) {
     // Logger.log([type, object.getPageElementType()])
     if (type == 'BODY') {
       let paragraphRange = object.getText()
-      insertMarkdownToParagraph(paragraphRange, cite)
+      insertMarkdownToParagraph(paragraphRange, cite, {
+        exclude: ['link']
+      })
       return true
     }
   }

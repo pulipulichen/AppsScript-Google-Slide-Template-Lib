@@ -8,6 +8,8 @@ let LAYOUT_DICT = {
   '4-1-1 內文 單欄': 'TITLE_AND_BODY_1',
   '4-1-2 雙欄標題vt': 'TITLE_AND_BODY_1_6_1',
   '4-1-2 雙欄h': 'TITLE_AND_BODY_1_3',
+  '4-1-2 雙欄h-73': 'TITLE_AND_BODY_1_3_2',
+  '4-1-2 雙欄h-37': 'TITLE_AND_BODY_1_3_2_1',
   '4-1-2 雙欄標題ht': 'TITLE_AND_BODY_1_3_1',
   '4-1-3 三欄標題ht': 'TITLE_AND_BODY_1_3_1_1',
   '4-1-3 三欄v': 'TITLE_AND_BODY_1_3_1_1_1',

@@ -21,11 +21,11 @@ function markdownToSlide(md, config = {}) {
 
     // ==================
 
-    if (i === 0) {
-      slideMarkdown = slideMarkdown + '\n\n----\n\n' + md
-    }
+    // if (i === 0) {
+    //   slideMarkdown = slideMarkdown + '\n\n----\n\n' + md
+    // }
 
-    setNotes(slide, notes, slideMarkdown)
+    setNotes(slide, notes)
     
 
     // ==================
