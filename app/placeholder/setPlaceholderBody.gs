@@ -4,6 +4,9 @@ function setPlaceholderBody(shape, markdown) {
   }
 
   markdown = markdown.trim()
+  if (markdown === '') {
+    return false
+  }
 
   let placeholder = shape
   // let content = markdown
@@ -11,6 +14,9 @@ function setPlaceholderBody(shape, markdown) {
   // ==========
 
   let list = parseMarkdownList(markdown)
+
+  // Logger.log(markdown)
+  // Logger.log(list)
 
   let textRange = placeholder.getText()
   

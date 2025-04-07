@@ -70,7 +70,7 @@ function setPlaceholderSmartArtColumnItemShapeNumberPictureCenter(slide, itemSha
 
   // =============================
 
-  Logger.log([baseTop, itemShape.getHeight()])
+  // Logger.log([baseTop, itemShape.getHeight()])
 
   let titleShape = slide.insertShape(
     SlidesApp.ShapeType.TEXT_BOX,

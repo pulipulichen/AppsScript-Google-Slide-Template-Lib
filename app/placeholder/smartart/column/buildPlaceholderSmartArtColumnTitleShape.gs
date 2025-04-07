@@ -9,7 +9,7 @@ function buildPlaceholderSmartArtColumnTitleShape(slide, baseSize, baseTop, item
     headerShapeHeight
   )
 
-  Logger.log({foreground, background})
+  // Logger.log({foreground, background})
   setPlaceholderSmartArtTitle(fontSize, headerShape, text, background, foreground)  
 
   return headerShape

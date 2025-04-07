@@ -3,8 +3,8 @@ function markdownToSlide(md, config = {}) {
 
   let slidesConfig = parseMarkdownToSlideBlocks(md)
   
-  for (let slideConfig of slidesConfig) {
-    let {elements, layout, notes, types, cite} = slideConfig
+  for (let i = 0; i < slidesConfig.length; i++) {
+    let {elements, layout, notes, types, cite, slideMarkdown} = slidesConfig[i]
 
     let layoutObject
     if (!layout) {
@@ -21,7 +21,12 @@ function markdownToSlide(md, config = {}) {
 
     // ==================
 
-    setNotes(slide, notes, md)
+    if (i === 0) {
+      slideMarkdown = slideMarkdown + '\n\n----\n\n' + md
+    }
+
+    setNotes(slide, notes, slideMarkdown)
+    
 
     // ==================
 
