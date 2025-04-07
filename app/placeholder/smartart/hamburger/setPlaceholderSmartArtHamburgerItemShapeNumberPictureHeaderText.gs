@@ -4,7 +4,7 @@ function setPlaceholderSmartArtHamburgerItemShapeNumberPictureHeaderText(slide, 
   setPlaceholderSmartArtContainer(itemShape, foreground, background)  
 
   let group = []
-  let fontSize = setPlaceholderSmartArtHamburgerFontSize(itemShape.getHeight())
+  let fontSize = setPlaceholderSmartArtHamburgerFontSize(itemShape)
 
   // ==================
   

@@ -14,7 +14,7 @@ function setPlaceholderSmartArtHamburgerItemShapeNumberPictureCenter(slide, item
   // let fontSize = getFontSizeFromShape(itemShape)
   // let numberShapeWidth = itemShape.getHeight()
   
-  let fontSize = setPlaceholderSmartArtHamburgerFontSize(itemShape.getHeight())
+  let fontSize = setPlaceholderSmartArtHamburgerFontSize(itemShape)
 
 
   let borderWidth = (fontSize / 10)

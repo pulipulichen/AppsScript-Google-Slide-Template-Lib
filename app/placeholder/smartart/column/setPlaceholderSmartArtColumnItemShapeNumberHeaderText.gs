@@ -1,18 +1,21 @@
-function setPlaceholderSmartArtHamburgerItemShapeNumberHeaderText(slide, itemShape, progress, i, title, subtitle, colorConfig, layoutConfig, titleLength) {
+function setPlaceholderSmartArtColumnItemShapeNumberHeaderText(slide, itemShape, progress, i, title, subtitle, colorConfig, layoutConfig, titleLength) {
   let {foreground, background} = getColor(progress, colorConfig)
 
   setPlaceholderSmartArtContainer(itemShape, foreground, background, layoutConfig)
   
   let group = []
-  let fontSize = setPlaceholderSmartArtHamburgerFontSize(itemShape)
+  let fontSize = setPlaceholderSmartArtColumnFontSize(itemShape)
+  let baseSize = Math.min(itemShape.getHeight(), itemShape.getWidth())
   
+  let baseTop = itemShape.getTop()
+
   // ==============
 
   if (layoutConfig.arrow === false) {
     group.push(itemShape)
   }
   else if (progress !== 1) {
-    let arrowShape = setPlaceholderSmartArtArrowBelow(fontSize, slide, itemShape)
+    let arrowShape = setPlaceholderSmartArtArrowRight(fontSize, slide, itemShape)
     let subgroup = slide.group([itemShape, arrowShape])
     subgroup.sendToBack()
     group.push(subgroup)
@@ -24,45 +27,47 @@ function setPlaceholderSmartArtHamburgerItemShapeNumberHeaderText(slide, itemSha
 
   // =========================
 
-  let numberShapeWidth = itemShape.getHeight()
+  let numberShapeHeight = baseSize / 3
+  
   let numberShape = slide.insertShape(
     SlidesApp.ShapeType.RECTANGLE,
     itemShape.getLeft(),
-    itemShape.getTop(),
-    numberShapeWidth,
-    itemShape.getHeight()
+    baseTop,
+    itemShape.getWidth(),
+    numberShapeHeight
   )
 
   setPlaceholderSmartArtHeader(fontSize, numberShape, (i + 1), foreground, background)  
   group.push(numberShape)
+  baseTop = baseTop + numberShapeHeight
 
   // =========================
     
-  let headerShapeWidthMargin = (itemShape.getHeight() / 2)
-  let headerShapeWidth = headerShapeWidthMargin * (titleLength + 1)
+  let headerShapeHeightMargin = (baseSize / 4)
+  let headerShapeHeight = headerShapeHeightMargin * 2
 
   let titleShape = slide.insertShape(
     SlidesApp.ShapeType.TEXT_BOX,
-    itemShape.getLeft() + itemShape.getHeight(),
-    itemShape.getTop(),
-    headerShapeWidth,
-    itemShape.getHeight()
+    itemShape.getLeft(),
+    baseTop,
+    itemShape.getWidth(),
+    headerShapeHeight
   )
 
   setPlaceholderSmartArtTitle(fontSize, titleShape, title, background)
   group.push(titleShape)
+  baseTop = baseTop + headerShapeHeight
 
   // =============================
 
   // Logger.log([itemShape.getWidth(), itemShape.getHeight()])
 
-  let textShapeMarginLeft = numberShapeWidth + headerShapeWidth + headerShapeWidthMargin
   let textShape = slide.insertShape(
     SlidesApp.ShapeType.TEXT_BOX,
-    itemShape.getLeft() + textShapeMarginLeft,
-    itemShape.getTop(),
-    itemShape.getWidth() - textShapeMarginLeft,
-    itemShape.getHeight()
+    itemShape.getLeft(),
+    baseTop,
+    itemShape.getWidth(),
+    itemShape.getHeight() - baseTop + itemShape.getTop()
   )
 
   let textColor = '#000000'
@@ -70,7 +75,7 @@ function setPlaceholderSmartArtHamburgerItemShapeNumberHeaderText(slide, itemSha
     textColor = '#FFFFFF'
   }
 
-  setPlaceholderSmartArtText(fontSize, textShape, subtitle, textColor)
+  setPlaceholderSmartArtTextCenter(fontSize, textShape, subtitle, textColor)
   group.push(textShape)
 
   slide.group(group).sendToBack()

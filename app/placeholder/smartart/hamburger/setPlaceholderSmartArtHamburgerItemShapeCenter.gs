@@ -6,7 +6,7 @@ function setPlaceholderSmartArtHamburgerItemShapeCenter(slide, itemShape, progre
   textRange.clear()
   textRange.setText(text);
 
-  let fontSize = setPlaceholderSmartArtHamburgerFontSize(itemShape.getHeight())
+  let fontSize = setPlaceholderSmartArtHamburgerFontSize(itemShape)
 
   let textStyle = textRange.getTextStyle()
   textStyle.setFontSize(fontSize); // 可選：設字體大小

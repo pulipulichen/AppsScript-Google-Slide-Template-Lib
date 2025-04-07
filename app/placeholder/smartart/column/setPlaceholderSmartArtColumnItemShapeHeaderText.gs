@@ -1,11 +1,13 @@
-function setPlaceholderSmartArtHamburgerItemShapeHeaderText(slide, itemShape, progress, i, title, subtitle, colorConfig, layoutConfig, titleLength) {
+function setPlaceholderSmartArtColumnItemShapeHeaderText(slide, itemShape, progress, i, title, subtitle, colorConfig, layoutConfig, titleLength) {
   let {foreground, background} = getColor(progress, colorConfig)
 
   setPlaceholderSmartArtContainer(itemShape, foreground, background, layoutConfig)
   
   let fontSize = setPlaceholderSmartArtHamburgerFontSize(itemShape)
+  let baseSize = Math.min(itemShape.getHeight(), itemShape.getWidth())
   
   let group = []
+  let baseTop = itemShape.getTop()
 
   // =============
 
@@ -13,7 +15,7 @@ function setPlaceholderSmartArtHamburgerItemShapeHeaderText(slide, itemShape, pr
     group.push(itemShape)
   }
   else if (progress !== 1) {
-    let arrowShape = setPlaceholderSmartArtArrowBelow(fontSize, slide, itemShape)
+    let arrowShape = setPlaceholderSmartArtArrowRight(fontSize, slide, itemShape)
     let subgroup = slide.group([itemShape, arrowShape])
     subgroup.sendToBack()
     group.push(subgroup)
@@ -23,24 +25,22 @@ function setPlaceholderSmartArtHamburgerItemShapeHeaderText(slide, itemShape, pr
     group.push(itemShape)
   }
 
-  // border.setDashStyle(SlidesApp.DashStyle.SOLID)
-  // border.getLineFill().setSolidFill(foreground)
+  // =================
 
-  // let fontSize = getFontSizeFromShape(itemShape)
-  // let numberShapeWidth = itemShape.getHeight()
-  
-  let headerShapeWidthMargin = (itemShape.getHeight() / 2)
-  let headerShapeWidth = headerShapeWidthMargin * (titleLength + 2)
+  let headerShapeHeightMargin = (baseSize / 4)
+  let headerShapeHeight = headerShapeHeightMargin * 2
+
   let headerShape = slide.insertShape(
-    SlidesApp.ShapeType.RECTANGLE,
+    SlidesApp.ShapeType.TEXT_BOX,
     itemShape.getLeft(),
-    itemShape.getTop(),
-    headerShapeWidth,
-    itemShape.getHeight()
+    baseTop,
+    itemShape.getWidth(),
+    headerShapeHeight
   )
 
   setPlaceholderSmartArtHeader(fontSize, headerShape, title, foreground, background)  
   group.push(headerShape)
+  baseTop = baseTop + headerShapeHeight
 
   // =============================
 
@@ -48,10 +48,10 @@ function setPlaceholderSmartArtHamburgerItemShapeHeaderText(slide, itemShape, pr
 
   let textShape = slide.insertShape(
     SlidesApp.ShapeType.TEXT_BOX,
-    itemShape.getLeft() + headerShapeWidth + headerShapeWidthMargin,
-    itemShape.getTop(),
-    itemShape.getWidth() - headerShapeWidth - headerShapeWidthMargin,
-    itemShape.getHeight()
+    itemShape.getLeft(),
+    baseTop,
+    itemShape.getWidth(),
+    itemShape.getHeight() - baseTop + itemShape.getTop()
   )
 
   let textColor = '#000000'
@@ -59,7 +59,7 @@ function setPlaceholderSmartArtHamburgerItemShapeHeaderText(slide, itemShape, pr
     textColor = '#FFFFFF'
   }
 
-  setPlaceholderSmartArtText(fontSize, textShape, subtitle, textColor)
+  setPlaceholderSmartArtTextCenter(fontSize, textShape, subtitle, textColor)
   group.push(textShape)
 
   slide.group(group).sendToBack()

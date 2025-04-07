@@ -6,7 +6,7 @@ function setPlaceholderSmartArtHamburgerItemShapePictureCenter(slide, itemShape,
   let group = []
 
   group.push(itemShape)
-  let fontSize = setPlaceholderSmartArtHamburgerFontSize(itemShape.getHeight())
+  let fontSize = setPlaceholderSmartArtHamburgerFontSize(itemShape)
   
   // border.setDashStyle(SlidesApp.DashStyle.SOLID)
   // border.getLineFill().setSolidFill(foreground)
