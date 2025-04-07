@@ -4,8 +4,8 @@ function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
     colorConfig
   } = setPlaceholderSmartArtHamburgerConfig(config)
 
-  let list = parseMarkdownListTree(markdown)
-  Logger.log({list})
+  let list = parseMarkdownListTree(markdown, config)
+  // Logger.log({list})
 
   // ===========================
 

@@ -23,10 +23,10 @@ function setPlaceholders(sortedPlaceholders, types, config) {
       }
       else if (type == 'BODY') {
         if (isMarkdownPicture(text)) {
-          setPlaceholderPicture(object, text)
+          setPlaceholderPicture(object, text, config)
         }
         else if (isMarkdownSmartArt(text)) {
-          setPlaceholderSmartArt(object, text)
+          setPlaceholderSmartArt(object, text, config)
         }
         else if (isMarkdownCode(text)) {
           setPlaceholderCode(object, text)

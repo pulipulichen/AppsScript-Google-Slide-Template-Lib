@@ -1,9 +1,9 @@
-function setPlaceholderPicture(shape, markdown) {
+function setPlaceholderPicture(shape, markdown, config) {
   if (typeof(shape.asShape) === 'function') {
     shape = shape.asShape()
   }
 
-  let imageURL = extractImageURLFromMarkdown(markdown)
+  let imageURL = extractImageURLFromMarkdown(markdown, config)
 
   // @TODO 這是Google Apps Script控制Google Slide
   // 1. 偵測shape的範圍

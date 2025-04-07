@@ -4,10 +4,10 @@ function setPlaceholderSmartArtColumn(shape, markdown, config = {}) {
     colorConfig
   } = setPlaceholderSmartArtColumnConfig(config)
 
-  let list = parseMarkdownListTree(markdown)
+  let list = parseMarkdownListTree(markdown, config)
   let titleLength = parseMarkdownListTitleLength(list)
   
-  Logger.log({list})
+  // Logger.log({list})
 
   // ===========================
 

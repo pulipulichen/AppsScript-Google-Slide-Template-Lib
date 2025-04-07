@@ -1,5 +1,5 @@
-function parseMarkdownListTree(markdown) {
-  let basicList = parseMarkdownList(markdown)
+function parseMarkdownListTree(markdown, config = {}) {
+  let basicList = parseMarkdownList(markdown, config)
 
   let output = []
 

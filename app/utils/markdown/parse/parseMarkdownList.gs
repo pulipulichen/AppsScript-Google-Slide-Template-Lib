@@ -1,4 +1,4 @@
-function parseMarkdownList(markdown) {
+function parseMarkdownList(markdown, config = {}) {
     const lines = markdown.split('\n').filter(line => line.trim() !== '');
     const result = [];
     const indentStack = [];
@@ -33,7 +33,9 @@ function parseMarkdownList(markdown) {
 
         let picture
         try {
-            picture = text.match(/!\[.*?\]\((.*?)\)/)[1];        
+            // picture = text.match(/!\[.*?\]\((.*?)\)/)[1];
+            picture = extractImageURLFromMarkdown(text, config)
+            
             text = text.replace(/!\[.*?\]\(.*?\)/g, '')
         }
         catch (e) {
