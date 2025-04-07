@@ -11,7 +11,7 @@ function parseCodeConfig(line) {
   if (startPos > 4 && endPos > (startPos + 2)) {
     try {
       let config = line.slice(startPos, endPos + 1)
-      Logger.log(config)
+      // Logger.log(config)
       config = JSON.parse(config)
 
       return {
