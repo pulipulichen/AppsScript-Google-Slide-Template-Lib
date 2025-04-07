@@ -2,6 +2,10 @@
 function extractImageURLFromMarkdown (markdown, config = {}) {
   let imageUrl = markdown.match(/^!\[.*?\]\((.*?)\)/)[1];
 
+  if (imageUrl.startsWith('<') && imageUrl.endsWith('>')) {
+    imageUrl = imageUrl.slice(1, -1)
+  }
+
   if (imageUrl.startsWith('"') || imageUrl.startsWith(`'`)) {
     imageUrl = imageUrl.slice(1)
   }

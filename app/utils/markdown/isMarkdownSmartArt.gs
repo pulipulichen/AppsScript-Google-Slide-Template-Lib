@@ -12,5 +12,7 @@
 function isMarkdownSmartArt(markdown) {
   markdown = markdown.trim()
 
-  return (markdown.startsWith('```') && markdown.includes("```smartart") && markdown.endsWith('```'));
+  return (markdown.startsWith('```') && 
+    (markdown.includes("```smartart") || markdown.includes("``` smartart"))  && 
+    markdown.endsWith('```'));
 }
