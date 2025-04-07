@@ -71,23 +71,23 @@ function setPlaceholderSmartArtColumn(shape, markdown, config = {}) {
     }
     else if (type === 'number' && title && picture) {
       let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
-      setPlaceholderSmartArtColumnItemShapeNumberPictureHeaderText(slide, itemShape, progress, i, picture, title, subtitle, colorConfig, layoutConfig, titleLength)
+      // setPlaceholderSmartArtColumnItemShapeNumberPictureHeaderText(slide, itemShape, progress, i, picture, title, subtitle, colorConfig, layoutConfig, titleLength)
     }
     else if (type === 'number' && !title && !picture) {
       let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
-      setPlaceholderSmartArtColumnItemShapeNumberCenter(slide, itemShape, progress, i, text, colorConfig, layoutConfig)
+      // setPlaceholderSmartArtColumnItemShapeNumberCenter(slide, itemShape, progress, i, text, colorConfig, layoutConfig)
     }
     else if (type === 'bullet' && title && picture) {
       let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
-      setPlaceholderSmartArtColumnItemShapePictureHeaderText(slide, itemShape, progress, picture, title, subtitle, colorConfig, layoutConfig, titleLength)
+      // setPlaceholderSmartArtColumnItemShapePictureHeaderText(slide, itemShape, progress, picture, title, subtitle, colorConfig, layoutConfig, titleLength)
     }
     else if (type === 'bullet' && title && !picture) {
       let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
-      setPlaceholderSmartArtColumnItemShapeHeaderText(slide, itemShape, progress, i, title, subtitle, colorConfig, layoutConfig, titleLength)
+      // setPlaceholderSmartArtColumnItemShapeHeaderText(slide, itemShape, progress, i, title, subtitle, colorConfig, layoutConfig, titleLength)
     }
     else if (type === 'number' && title && !picture) {
       let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
-      setPlaceholderSmartArtColumnItemShapeNumberHeaderText(slide, itemShape, progress, i, title, subtitle, colorConfig, layoutConfig, titleLength)
+      // setPlaceholderSmartArtColumnItemShapeNumberHeaderText(slide, itemShape, progress, i, title, subtitle, colorConfig, layoutConfig, titleLength)
     }
   }
 

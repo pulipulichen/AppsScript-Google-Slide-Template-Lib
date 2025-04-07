@@ -11,7 +11,8 @@ function setPlaceholderSmartArtArrowRight(slide, itemShape, color) {
   let fontSize = baseSize / 2
   let arrowSize = baseSize / 1.5
   
-  let arrowLeft = itemShape.getLeft() + itemShape.getWidth() - (arrowSize / 2) + (fontSize / 5)
+  // let arrowLeft = itemShape.getLeft() + itemShape.getWidth() - (arrowSize / 2) + (fontSize / 5)
+  let arrowLeft = itemShape.getLeft() + itemShape.getWidth() - (arrowSize / 2) + (fontSize / 10)
   let arrowTop = itemShape.getTop() + (itemShape.getHeight() / 2) - (arrowSize / 2)
 
   let arrowShape = slide.insertShape(
