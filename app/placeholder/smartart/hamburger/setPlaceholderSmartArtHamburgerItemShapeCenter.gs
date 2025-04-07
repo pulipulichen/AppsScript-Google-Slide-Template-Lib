@@ -1,4 +1,3 @@
-
 function setPlaceholderSmartArtHamburgerItemShapeCenter(slide, itemShape, progress, i, text, colorConfig, layoutConfig) {
   let {foreground, background} = getColor(progress, colorConfig)
 

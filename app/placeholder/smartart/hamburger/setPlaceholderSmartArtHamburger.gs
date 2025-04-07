@@ -74,7 +74,7 @@ function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
     }
     else if (type === 'bullet' && title && picture) {
       let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
-      setPlaceholderSmartArtHamburgerItemShapePictureHeaderText(slide, itemShape, progress, picture, title, subtitle, colorConfig, layoutConfig, titleLength)
+      setPlaceholderSmartArtHamburgerItemShapeNumberPictureTitleText(slide, itemShape, progress, picture, title, subtitle, colorConfig, layoutConfig, titleLength)
     }
     else if (type === 'bullet' && title && !picture) {
       let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
@@ -82,7 +82,7 @@ function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
     }
     else if (type === 'number' && title && !picture) {
       let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
-      setPlaceholderSmartArtHamburgerItemShapeNumberHeaderText(slide, itemShape, progress, i, title, subtitle, colorConfig, layoutConfig, titleLength)
+      setPlaceholderSmartArtHamburgerItemShapeNumberTitleText(slide, itemShape, progress, i, title, subtitle, colorConfig, layoutConfig, titleLength)
     }
   }
 

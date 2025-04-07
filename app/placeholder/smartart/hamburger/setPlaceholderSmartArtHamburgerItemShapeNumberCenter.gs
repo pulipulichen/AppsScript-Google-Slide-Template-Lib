@@ -8,46 +8,22 @@ function setPlaceholderSmartArtHamburgerItemShapeNumberCenter(slide, itemShape, 
 
   group.push(itemShape)
   
-  
-  // border.setDashStyle(SlidesApp.DashStyle.SOLID)
-  // border.getLineFill().setSolidFill(foreground)
+  // =========================
 
-  // let fontSize = getFontSizeFromShape(itemShape)
-  // let numberShapeWidth = itemShape.getHeight()
-  
-  let numberShape = slide.insertShape(
-    SlidesApp.ShapeType.RECTANGLE,
-    itemShape.getLeft(),
-    itemShape.getTop(),
-    itemShape.getHeight(),
-    itemShape.getHeight()
-  )
+  let baseLeft = itemShape.getLeft()
 
-  setPlaceholderSmartArtHeader(fontSize, numberShape, (i + 1), foreground, background)  
+  // ==========================
+
+  let numberShape = buildSmartArtRowNumber(baseLeft, slide, itemShape, fontSize, i, foreground, background)
   group.push(numberShape)
+  baseLeft = baseLeft + numberShape.getWidth()
 
   // =============================
 
-  // Logger.log([itemShape.getWidth(), itemShape.getHeight()])
+  let titleShape = buildSmartArtRowTitleLast(baseLeft, fontSize, slide, itemShape, text, background)
 
-  let titleShape = slide.insertShape(
-    SlidesApp.ShapeType.TEXT_BOX,
-    itemShape.getLeft() + itemShape.getHeight(),
-    itemShape.getTop(),
-    itemShape.getWidth() - itemShape.getHeight(),
-    itemShape.getHeight()
-  )
-
-  setPlaceholderSmartArtTitle(fontSize, titleShape, text, background)
-  
-  if (layoutConfig.arrow === false || progress === 1) {
-    group.push(titleShape)
-  }
-  else if (progress !== 1) {
-    let arrowShape = setPlaceholderSmartArtArrowBelow(fontSize, slide, titleShape)
-    let subgroup = slide.group([titleShape, arrowShape])
-    group.push(subgroup) 
-  }
+  let subgroup = buildSmartArtRowArrow(fontSize, slide, titleShape, layoutConfig, progress)
+  group.push(subgroup)
 
   slide.group(group).sendToBack()
 }
