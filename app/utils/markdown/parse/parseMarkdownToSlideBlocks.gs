@@ -17,6 +17,7 @@ function parseMarkdownToSlideBlocks(markdown) {
 
     const lines = slideMarkdown.split('\n');
     let layout = null
+    let cite = null
     const result = [];
 
     let bodyBuffer = []
@@ -49,8 +50,11 @@ function parseMarkdownToSlideBlocks(markdown) {
 
       // let isBody = false
       if (trimmed.startsWith('::: layout:') || trimmed.startsWith('::: layout=')) {
-        layout = trimmed.slice(11)
-      } 
+        layout = trimmed.slice(trimmed.indexOf(' layout') + 8)
+      }
+      else if (trimmed.startsWith('::: cite:') || trimmed.startsWith('::: cite=') || trimmed.startsWith('::: cite ')) {
+        cite = trimmed.slice(trimmed.indexOf(' cite') + 6)
+      }
       else if (isCode) {
         codeBuffer.push(line)
       }
@@ -119,11 +123,14 @@ function parseMarkdownToSlideBlocks(markdown) {
     if (notes) {
       item.notes = notes
     }
+    if (cite) {
+      item.cite = cite
+    }
 
     output.push(item)
   }
   
-  Logger.log(output)
+  // Logger.log(output)
 
   return output;
 }

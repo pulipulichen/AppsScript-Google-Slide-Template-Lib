@@ -4,7 +4,7 @@ function markdownToSlide(md, config = {}) {
   let slidesConfig = parseMarkdownToSlideBlocks(md)
   
   for (let slideConfig of slidesConfig) {
-    let {elements, layout, notes, types} = slideConfig
+    let {elements, layout, notes, types, cite} = slideConfig
 
     let layoutObject
     if (!layout) {
@@ -29,6 +29,8 @@ function markdownToSlide(md, config = {}) {
     const sortedPlaceholders = sortPlaceholders(placeholders)
 
     setPlaceholders(sortedPlaceholders, types, config)
+
+    setPlaceholderCite(sortedPlaceholders, cite)
+    setPlaceholderFooter(sortedPlaceholders, config.footer)
   }
 }
-
