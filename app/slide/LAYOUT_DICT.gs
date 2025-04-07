@@ -1,0 +1,22 @@
+let LAYOUT_DICT = {
+  '6 結束 空白': 'TITLE_2_1_1',
+  '3-2 章節h2': 'TITLE_2_1_1_1',
+  '1 封面': 'TITLE_1',
+  '3 章節h1': 'CUSTOM_10_1',
+  '2-2 子目錄': 'CUSTOM_10_1_1',
+  '2 目錄': 'TITLE_AND_BODY_1_5',
+  '4-1-1 內文 單欄': 'TITLE_AND_BODY_1',
+  '4-1-2 雙欄標題vt': 'TITLE_AND_BODY_1_6_1',
+  '4-1-2 雙欄h': 'TITLE_AND_BODY_1_3',
+  '4-1-2 雙欄標題ht': 'TITLE_AND_BODY_1_3_1',
+  '4-1-3 三欄標題ht': 'TITLE_AND_BODY_1_3_1_1',
+  '4-1-3 三欄v': 'TITLE_AND_BODY_1_3_1_1_1',
+  '4-2 補充': 'TITLE_AND_BODY_1_4',
+  '4-2 結尾': 'TITLE_AND_BODY_1_4_3',
+  '4-3 內文強調 文字為主': 'TITLE_AND_BODY_1_4_2',
+  '4-3 內文強調 白底大字': 'TITLE_AND_BODY_1_4_1',
+  '4-3 內文強調 大字': 'BIG_NUMBER_1_1',
+  '4-3 內文強調 空白': 'BLANK',
+  '5 參考資料': 'TITLE_AND_BODY_1_5_1',
+  '5-2 下一步驟': 'TITLE_AND_BODY_1_5_1_1'
+}

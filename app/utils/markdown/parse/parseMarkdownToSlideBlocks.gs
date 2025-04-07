@@ -48,7 +48,7 @@ function parseMarkdownToSlideBlocks(markdown) {
       const trimmed = line.trim();
 
       // let isBody = false
-      if (trimmed.startsWith('::: layout=')) {
+      if (trimmed.startsWith('::: layout:') || trimmed.startsWith('::: layout=')) {
         layout = trimmed.slice(11)
       } 
       else if (isCode) {

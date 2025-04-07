@@ -10,9 +10,25 @@ function findLayout(layoutName) {
     return LAYOUT_CACHE['TITLE_AND_BODY']
   }
 
+  if (LAYOUT_DICT[layoutName]) {
+    let layoutNameList = LAYOUT_DICT[layoutName]
+
+    if (Array.isArray(layoutName) === false) {
+      layoutNameList = [layoutNameList]
+    }
+
+    for (let name of layoutNameList) {
+      if (LAYOUT_CACHE[name]) {
+        return LAYOUT_CACHE[name]
+      }
+    }
+  }
+
+
   if (!LAYOUT_CACHE[layoutName]) {
     loadLayoutCache()
   }
+
 
   if (!LAYOUT_CACHE[layoutName]) {
     if (LAYOUT_CACHE['TITLE_AND_BODY']) {
@@ -77,7 +93,10 @@ function loadLayoutCache(config = {}) {
   LAYOUT_PLACEHOLDER_MAP_CACHE = {}
   // 尋找名稱為「紫色背景區段標題」的 layout
   for (const master of masters) {
+    // Logger.log({keys: Object.keys(master), name: master.toString()})
+
     const layouts = master.getLayouts();
+    // Logger.log(Object.keys(layouts[0]))
     for(var item in layouts)
     {
       let name = layouts[item].getLayoutName()
