@@ -5,7 +5,14 @@ function setPlaceholderSmartArtHeader(shape, text, foreground, background) {
   textRange.clear()
   textRange.setText(text);
 
-  let fontSize = shape.getHeight() / 2
+  // let baseSize = Math.min(shape.getHeight(), shape.getWidth())
+  let fontSize
+  if (shape.getHeight() > shape.getWidth()) {
+    fontSize = shape.getWidth() / 4
+  }
+  else {
+    fontSize = shape.getHeight() / 2
+  }
 
   let textStyle = textRange.getTextStyle()
   textStyle.setFontSize(fontSize); // 可選：設字體大小

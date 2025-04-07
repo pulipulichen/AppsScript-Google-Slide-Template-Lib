@@ -3,14 +3,20 @@ function setPlaceholderSmartArtText(shape, text, color) {
   let fontSize
   let lines = text.trim().split('\n')
   let linesCount = lines.length
+
+  let baseSize = Math.min(shape.getHeight(), shape.getWidth())
   if (linesCount < 2) {
-    fontSize = shape.getHeight() / 3
+    fontSize = baseSize / 3
   }
   else if (linesCount == 2) {
-    fontSize = shape.getHeight() / 3.5
+    fontSize = baseSize / 3.5
   }
   else {
-    fontSize = shape.getHeight() / 4
+    fontSize = baseSize / 4
+  }
+
+  if (shape.getHeight() > shape.getWidth()) {
+    fontSize = fontSize / 2
   }
 
   let textRange = shape.getText()

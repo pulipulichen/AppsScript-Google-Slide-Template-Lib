@@ -6,7 +6,7 @@ function setPlaceholderSmartArtColumnItemShapeCenter(slide, itemShape, progress,
   textRange.clear()
   textRange.setText(text);
 
-  let fontSize = setPlaceholderSmartArtColumnItemShapeCenter(itemShape)
+  let fontSize = setPlaceholderSmartArtColumnFontSize(itemShape)
 
   let textStyle = textRange.getTextStyle()
   textStyle.setFontSize(fontSize); // 可選：設字體大小

@@ -6,7 +6,8 @@ function setPlaceholderSmartArtArrowBelow(slide, itemShape, color) {
 
   itemShape.sendToBack()
 
-  let fontSize = itemShape.getHeight() / 2
+  let baseSize = Math.min(itemShape.getWidth(), itemShape.getHeight())
+  let fontSize = baseSize / 2
 
   let arrowSize = itemShape.getHeight() / 1.5
   let arrowLeft = itemShape.getLeft() + (itemShape.getWidth() / 2) - (arrowSize / 2)

@@ -21,11 +21,15 @@ function setPlaceholderSmartArtColumn(shape, markdown, config = {}) {
 
   // ========
   
-  const shapeVerticalMargin = containerHeight / 10 / (count - 1)
+  
   let shapeHeight = containerHeight
   if (layoutConfig.direction !== '46') {
     shapeHeight =  shapeHeight * 0.8
   }
+  else {
+    shapeHeight =  shapeHeight * 0.5
+  }
+  const shapeVerticalMargin = (containerHeight - shapeHeight) / (count - 1)
 
   const shapeHorizontalMargin = containerWidth / (count * 2 + (count - 1))
   const shapeWidth = shapeHorizontalMargin * 2
