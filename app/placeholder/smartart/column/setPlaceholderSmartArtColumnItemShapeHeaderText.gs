@@ -27,20 +27,9 @@ function setPlaceholderSmartArtColumnItemShapeHeaderText(slide, itemShape, progr
 
   // =================
 
-  let headerShapeHeightMargin = (baseSize / 4)
-  let headerShapeHeight = headerShapeHeightMargin * 2
-
-  let headerShape = slide.insertShape(
-    SlidesApp.ShapeType.TEXT_BOX,
-    itemShape.getLeft(),
-    baseTop,
-    itemShape.getWidth(),
-    headerShapeHeight
-  )
-
-  setPlaceholderSmartArtHeader(fontSize, headerShape, title, foreground, background)  
+  let headerShape = buildPlaceholderSmartArtColumnHeaderShape(baseSize, baseTop, itemShape, fontSize, text, foreground, background)
   group.push(headerShape)
-  baseTop = baseTop + headerShapeHeight
+  baseTop = baseTop + headerShape.getHeight
 
   // =============================
 

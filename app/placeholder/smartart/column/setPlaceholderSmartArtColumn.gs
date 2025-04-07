@@ -71,7 +71,7 @@ function setPlaceholderSmartArtColumn(shape, markdown, config = {}) {
     }
     else if (type === 'number' && title && picture) {
       let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
-      setPlaceholderSmartArtColumnItemShapeNumberPictureHeaderText(slide, itemShape, progress, i, picture, title, subtitle, colorConfig, layoutConfig, titleLength)
+      setPlaceholderSmartArtColumnItemShapeNumberPictureTitleText(slide, itemShape, progress, i, picture, title, subtitle, colorConfig, layoutConfig, titleLength)
     }
     else if (type === 'number' && !title && !picture) {
       let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
@@ -87,7 +87,7 @@ function setPlaceholderSmartArtColumn(shape, markdown, config = {}) {
     }
     else if (type === 'number' && title && !picture) {
       let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
-      setPlaceholderSmartArtColumnItemShapeNumberHeaderText(slide, itemShape, progress, i, title, subtitle, colorConfig, layoutConfig, titleLength)
+      setPlaceholderSmartArtColumnItemShapeNumberTitleText(slide, itemShape, progress, i, title, subtitle, colorConfig, layoutConfig, titleLength)
     }
   }
 

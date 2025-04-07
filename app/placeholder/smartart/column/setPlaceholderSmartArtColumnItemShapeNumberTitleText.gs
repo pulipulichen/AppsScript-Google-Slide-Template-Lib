@@ -1,4 +1,4 @@
-function setPlaceholderSmartArtColumnItemShapeNumberHeaderText(slide, itemShape, progress, i, title, subtitle, colorConfig, layoutConfig, titleLength) {
+function setPlaceholderSmartArtColumnItemShapeNumberTitleText(slide, itemShape, progress, i, title, subtitle, colorConfig, layoutConfig, titleLength) {
   let {foreground, background} = getColor(progress, colorConfig)
 
   setPlaceholderSmartArtContainer(itemShape, foreground, background, layoutConfig)
@@ -43,20 +43,9 @@ function setPlaceholderSmartArtColumnItemShapeNumberHeaderText(slide, itemShape,
 
   // =========================
     
-  let headerShapeHeightMargin = (baseSize / 4)
-  let headerShapeHeight = headerShapeHeightMargin * 2
-
-  let titleShape = slide.insertShape(
-    SlidesApp.ShapeType.TEXT_BOX,
-    itemShape.getLeft(),
-    baseTop,
-    itemShape.getWidth(),
-    headerShapeHeight
-  )
-
-  setPlaceholderSmartArtTitle(fontSize, titleShape, title, background)
-  group.push(titleShape)
-  baseTop = baseTop + headerShapeHeight
+  let headerShape = buildPlaceholderSmartArtColumnTitleShape(baseSize, baseTop, itemShape, fontSize, text, foreground, background)
+  group.push(headerShape)
+  baseTop = baseTop + headerShape.getHeight
 
   // =============================
 

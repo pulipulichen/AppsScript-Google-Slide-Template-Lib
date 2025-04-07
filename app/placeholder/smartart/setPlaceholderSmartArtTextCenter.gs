@@ -37,6 +37,6 @@ function setPlaceholderSmartArtTextCenter(fontSize, shape, text, color) {
 
   let paragraphStyle = textRange.getParagraphStyle()
   paragraphStyle.setParagraphAlignment(SlidesApp.ParagraphAlignment.CENTER)
-  shape.setContentAlignment(SlidesApp.ContentAlignment.TOP)
+  shape.setContentAlignment(SlidesApp.ContentAlignment.MIDDLE)
 
 }
