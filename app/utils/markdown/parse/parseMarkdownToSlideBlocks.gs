@@ -1,5 +1,11 @@
 function parseMarkdownToSlideBlocks(markdown) {
-  markdown = markdown.trim().split('\n---\n').join('\n----\n')
+  markdown = markdown.trim()
+  if (markdown.startsWith('---')) {
+    markdown = markdown.slice(markdown.indexOf('\n') + 1).trim()
+  }
+
+  markdown = markdown.split('\n---\n').join('\n----\n')
+
 
   const slidesMarkdown = markdown.split('\n----\n'); 
   const output = []
@@ -8,12 +14,26 @@ function parseMarkdownToSlideBlocks(markdown) {
     let slideMarkdown = slidesMarkdown[i]
     slideMarkdown = slideMarkdown.trim()
 
+    if (slideMarkdown === '') {
+      continue
+    }
+
     let notes = []
-    if (slideMarkdown.indexOf("\n::: notes\n") > -1) {
+    if (slideMarkdown.indexOf("::: notes") > -1) {
       let startPos = slideMarkdown.indexOf('::: notes') + 9
       let endPos = slideMarkdown.indexOf(':::', startPos)
-      notes = [slideMarkdown.slice(startPos, endPos).trim()]
-      slideMarkdown = slideMarkdown.slice(0 , startPos - 9) + slideMarkdown.slice(endPos + 3)
+      if (endPos === -1) {
+        endPos = slideMarkdown.length - 1
+        notes = [slideMarkdown.slice(startPos, endPos).trim()]
+        slideMarkdown = slideMarkdown.slice(0 , startPos - 9)
+        // Logger.log({
+        //   endPos, note: notes[0], slideMarkdown
+        // })
+      }
+      else {
+        notes = [slideMarkdown.slice(startPos, endPos).trim()]
+        slideMarkdown = slideMarkdown.slice(0 , startPos - 9) + slideMarkdown.slice(endPos + 3)
+      }
     }
     
     const lines = slideMarkdown.split('\n');
@@ -55,8 +75,7 @@ function parseMarkdownToSlideBlocks(markdown) {
         layout = trimmed.slice(trimmed.indexOf(' layout') + 8)
       }
       else if (trimmed.startsWith('::: cite:') || trimmed.startsWith('::: cite=') || trimmed.startsWith('::: cite ')) {
-        cite = trimmed.slice(trimmed.indexOf(' cite') + 6)
-
+        cite = trimmed.slice(trimmed.indexOf(' cite') + 6).trim()
       }
       else if (trimmed.startsWith('::: smartart')) {
         smartart = trimmed.slice(trimmed.indexOf(' smartart') + 1)
@@ -66,6 +85,15 @@ function parseMarkdownToSlideBlocks(markdown) {
       }
       else if (trimmed.startsWith('::: notes')) {
         notes.push(trimmed.slice(trimmed.indexOf(' notes') + 6))
+      }
+      else if (trimmed.startsWith('::: ')) {
+        let text = trimmed.slice(trimmed.indexOf('::: ') + 4).trim()
+        if (!cite) {
+          cite = text
+        }
+        else {
+          notes.push(text)
+        }
       }
       else if (line.startsWith('>')) {
         notes.push(line.slice(2))

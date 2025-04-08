@@ -33,15 +33,15 @@ function sortPlaceholders(placeholders) {
   }
 
   output.sort((a, b) => {
-    // if (a.top !== b.top) {
-    //   return a.top - b.top; // 先排 top（由小到大）
-    // }
-    // return a.left - b.left; // top 相同時排 left（由小到大）
+    if (a.top !== b.top) {
+      return a.top - b.top; // 先排 top（由小到大）
+    }
+    return a.left - b.left; // top 相同時排 left（由小到大）
 
-    if (a.left !== b.left) {
-        return a.left - b.left; // 先排 top（由小到大）
-      }
-      return a.top - b.top; // top 相同時排 left（由小到大）
+    // if (a.left !== b.left) {
+    //     return a.left - b.left; // 先排 top（由小到大）
+    //   }
+    //   return a.top - b.top; // top 相同時排 left（由小到大）
   });
 
   return output
