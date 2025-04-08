@@ -28,5 +28,8 @@ function setPlaceholderPicture(shape, markdown, config) {
   //   image.crop(0, cropOffset, 0, cropOffset);
   // }
   
-  shape.replaceWithImage(imageURL, true)
+  shape = shape.replaceWithImage(imageURL, true)
+  shape = shape.replaceWithImage(shape)
+
+  return shape
 }
