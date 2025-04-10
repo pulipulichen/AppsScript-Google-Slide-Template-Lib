@@ -3,7 +3,12 @@ function parseMarkdownToSlideBlocks(markdown) {
   if (markdown.startsWith('---')) {
     markdown = markdown.slice(markdown.indexOf('\n') + 1).trim()
   }
+  if (markdown.endsWith('---')) {
+    markdown = markdown.slice(0, markdown.lastIndexOf('\n') ).trim()
+  }
 
+  markdown = markdown.split('\n--- \n').join('\n----\n')
+  markdown = markdown.split('\n---  \n').join('\n----\n')
   markdown = markdown.split('\n---\n').join('\n----\n')
 
 

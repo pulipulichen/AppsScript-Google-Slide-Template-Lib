@@ -1,5 +1,16 @@
-function sortPlaceholders(placeholders) {
+function sortPlaceholders(placeholders, config = {}) {
   let output = []
+
+  const presentation = SlidesApp.getActivePresentation();
+  const pageHeight = presentation.getPageHeight()
+
+  let {
+    excludeBelowTop = 0.8
+  } = config
+
+  if (excludeBelowTop) {
+    excludeBelowTop = pageHeight * excludeBelowTop
+  }
     
   for (let i = 0; i < placeholders.length; i++) {
     let placeholder = placeholders[i]
@@ -21,6 +32,10 @@ function sortPlaceholders(placeholders) {
       type = 'TITLE'
     }
     if (type == 'SLIDE_NUMBER') {
+      continue
+    }
+
+    if (excludeBelowTop && top > excludeBelowTop) {
       continue
     }
 

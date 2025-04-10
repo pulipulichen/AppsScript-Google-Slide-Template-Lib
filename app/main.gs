@@ -35,7 +35,11 @@ function markdownToSlide(md, config = {}) {
 
     setPlaceholders(sortedPlaceholders, types, config)
 
-    setPlaceholderCite(sortedPlaceholders, cite)
-    setPlaceholderFooter(sortedPlaceholders, config.footer)
+
+    const sortedPlaceholdersAll = sortPlaceholders(placeholders, {
+      excludeBelowTop: 1
+    })
+    setPlaceholderCite(sortedPlaceholdersAll, cite)
+    setPlaceholderFooter(sortedPlaceholdersAll, config.footer)
   }
 }
