@@ -1,4 +1,4 @@
-function cloneSlide(url) {
+function cloneSlide(url, footer) {
   try {
     // url = 'https://docs.google.com/presentation/d/1NTCU0a5boGoZwCkdSPG1ZmrrcU3hL_A1iEcew4LvZ5w/edit#slide=id.SLIDES_API1556269895_0'
 
@@ -58,24 +58,83 @@ function cloneSlide(url) {
     const layoutObject = findLayout(layoutName)
     const slide = presentation.appendSlide(layoutObject)
 
+    let CURRENT_ELEMENT_MAP = {}
     for (let element of slide.getPageElements()) {
-      element.remove()
+      let key = getElementKey (element)
+      // Logger.log({key})
+      CURRENT_ELEMENT_MAP[getElementKey (element)] = element
     }
 
     for (let element of sourceSlide.getPageElements()) {
       cloneElement(element, slide)
+
+      let key = getElementKey (element)
+      // Logger.log({key})
+      if (CURRENT_ELEMENT_MAP[key]) {
+        // Logger.log('嘗試刪除 ' + CURRENT_ELEMENT_MAP[key])
+        try {
+          CURRENT_ELEMENT_MAP[key].remove()
+        }
+        catch (e) {
+          Logger.log(e)
+        }
+      }
     }
 
+    // ====================================
+
+    // Logger.log('2') 
 
     // ====================================
 
     const notesPage = slide.getNotesPage();
     const shape = notesPage.getSpeakerNotesShape();
     shape.getText().setText(sourceSlide.getNotesPage().getSpeakerNotesShape().getText().asRenderedString());
+
+    // Logger.log('3')    
+
+    // ===================================
+    
+    if (footer) {
+      const elements = slide.getPageElements();
+
+      let pageHeight = presentation.getPageHeight()
+
+      let footerElement = elements[0]
+      let leftBottomDistance = footerElement.getLeft() + (pageHeight - footerElement.getTop() - footerElement.getHeight())
+
+      for (let i = 1; i < elements.length; i++) {
+        let element = elements[i]
+        if (element.getPageElementType() != 'SHAPE') {
+          continue
+        }
+
+        let distance = element.getLeft() + (pageHeight - element.getTop() - element.getHeight())
+        if (distance < leftBottomDistance) {
+          leftBottomDistance = distance
+          footerElement = element
+        }
+      }
+      footerElement.asShape().getText().setText(footer)
+    }
+
+    // Logger.log('4')    
+      
+    return slide
   } catch (e) {
     Logger.log(e);
     return 'Error: ' + e.message;
   }
+}
+
+function getElementKey (element) {
+  return [
+    element.getPageElementType(),
+    element.getLeft(),
+    element.getTop(),
+    element.getWidth(),
+    element.getHeight()
+  ].join(',')
 }
 
 function cloneElement(element, slide) {
