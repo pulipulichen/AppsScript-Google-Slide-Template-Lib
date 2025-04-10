@@ -1,1 +1,1 @@
-修正footer的問題
+來處理smartart width跟height的問題

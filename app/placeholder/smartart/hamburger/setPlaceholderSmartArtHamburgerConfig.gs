@@ -9,6 +9,17 @@ function setPlaceholderSmartArtHamburgerConfig(config) {
   } = config
 
 
+
+  // ===========================
+  
+  if (!config.width) {
+    config.width = 1
+  }
+
+  if (!config.height) {
+    config.height = 1
+  }
+
   // ===========================
 
   if (typeof(layout) === 'string') {
@@ -20,6 +31,8 @@ function setPlaceholderSmartArtHamburgerConfig(config) {
   let layoutConfig = {
     direction: '73', 
     arrow: false,
+    height: config.height,
+    width: config.width,
     ...layout
   }
 

@@ -5,9 +5,19 @@ function setPlaceholderSmartArtColumnConfig(config) {
     // colorReverse = false,
     // colorInvert = true
     layout = {},
-    color = {}
+    color = {},
   } = config
 
+
+  // ===========================
+  
+  if (!config.width) {
+    config.width = 1
+  }
+
+  if (!config.height) {
+    config.height = 1
+  }
 
   // ===========================
 
@@ -20,6 +30,8 @@ function setPlaceholderSmartArtColumnConfig(config) {
   let layoutConfig = {
     direction: '46', 
     arrow: false,
+    height: config.height,
+    width: config.width,
     ...layout
   }
 
