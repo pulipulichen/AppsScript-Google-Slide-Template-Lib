@@ -52,6 +52,15 @@ function parseMarkdownToSlideBlocks(markdown) {
 
     let appendBody = () => {
       if (bodyBuffer.length > 0) {
+        // let type = "BODY_PORTRAIT"
+
+        // let max
+
+        let type = "BODY"
+        if (bodyBuffer.length > 5) {
+          type = 'BODY_PORTRAIT'
+        }
+
         result.push({
           type: "BODY",
           text: bodyBuffer.join('\n') 
@@ -125,10 +134,14 @@ function parseMarkdownToSlideBlocks(markdown) {
           text: subtitle
         })
       } else if (/^!\[.*?\]\((.*?)\)/.test(trimmed)) {
-        const imageUrl = trimmed.match(/^!\[.*?\]\((.*?)\)/)[1];
+        
         appendBody()
+
+        const imageUrl = trimmed.match(/^!\[.*?\]\((.*?)\)/)[1];
+        const orientation = checkImageOrientation(imageUrl)
+
         result.push({
-          type: "BODY",
+          type: "BODY_" + orientation.toUpperCase(),
           text: trimmed
         })
       }
@@ -164,7 +177,7 @@ function parseMarkdownToSlideBlocks(markdown) {
         if (type === 'BODY' && text.includes('\n')) {
           result[i].text = "``` " + smartart + '\n' + result[i].text + '\n```'
         }
-        Logger.log(result[i].text)
+        // Logger.log(result[i].text)
       }
     }
 
@@ -178,6 +191,13 @@ function parseMarkdownToSlideBlocks(markdown) {
         types[type] = []
       }
       types[type].push(text)
+
+      if (type.startsWith('BODY_')) {
+        if (!types['BODY']) {
+          types['BODY'] = []
+        }
+        types['BODY'].push(text)
+      }
     }
 
     // ===================

@@ -43,3 +43,10 @@ let LAYOUT_DICT = {
   '5-2 下一步驟': 'TITLE_AND_BODY_1_5_1_1',
   '下一步驟': 'TITLE_AND_BODY_1_5_1_1'
 }
+
+let LAYOUT_DETECT_EXCLUDE_LIST = [
+  'TITLE_1',
+  'CUSTOM_10_1_1',
+  'TITLE_AND_BODY_1_5',
+  'TITLE_AND_BODY_1_5_1'
+]

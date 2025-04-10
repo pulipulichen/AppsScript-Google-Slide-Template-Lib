@@ -1,5 +1,6 @@
 let LAYOUT_CACHE = null
 let LAYOUT_PLACEHOLDER_MAP_CACHE = null
+let LAYOUT_PLACEHOLDER_MAP_LIST = []
 
 function loadLayoutCache(config = {}) {
   let {excludeElements = []} = config
@@ -33,6 +34,16 @@ function loadLayoutCache(config = {}) {
       // types.sort((a, b) => (b + '').localeCompare(a + ''))
 
       let typesKey = types.join(',')
+
+      if (LAYOUT_DETECT_EXCLUDE_LIST.includes(name)) {
+        continue
+      }
+
+      LAYOUT_PLACEHOLDER_MAP_LIST.push({
+        types,
+        object: LAYOUT_CACHE[name],
+        name
+      })
 
       // Logger.log(`${name} - ${typesKey} - ${excludeElements.length}`)
 
