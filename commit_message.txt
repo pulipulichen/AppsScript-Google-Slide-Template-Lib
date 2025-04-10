@@ -1,1 +1,1 @@
-來處理smartart width跟height的問題
+來判斷圖片的方向，一邊來做複製投影片

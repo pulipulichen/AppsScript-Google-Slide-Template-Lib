@@ -4,7 +4,12 @@ function markdownToSlide(md, config = {}) {
   let slidesConfig = parseMarkdownToSlideBlocks(md)
   
   for (let i = 0; i < slidesConfig.length; i++) {
-    let {elements, layout, notes, types, cite, slideMarkdown} = slidesConfig[i]
+    let {elements, layout, notes, types, cite, clone} = slidesConfig[i]
+
+    if (clone) {
+      cloneSlide(url)
+      continue
+    }
 
     let layoutObject
     if (!layout) {

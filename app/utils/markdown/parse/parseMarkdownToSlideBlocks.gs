@@ -45,6 +45,7 @@ function parseMarkdownToSlideBlocks(markdown) {
     let layout = null
     let cite = null
     let smartart = null
+    let clone = null
     const result = [];
 
     let bodyBuffer = []
@@ -90,6 +91,9 @@ function parseMarkdownToSlideBlocks(markdown) {
       }
       else if (trimmed.startsWith('::: notes')) {
         notes.push(trimmed.slice(trimmed.indexOf(' notes') + 6))
+      }
+      else if (isMarkdownClone(trimmed)) {
+        clone = trimmed
       }
       else if (trimmed.startsWith('::: ')) {
         let text = trimmed.slice(trimmed.indexOf('::: ') + 4).trim()
@@ -208,6 +212,14 @@ function parseMarkdownToSlideBlocks(markdown) {
 
     item.notes = notes
     // Logger.log(notes)
+
+    // =======================
+
+    if (clone) {
+      item.clone = clone
+    }
+
+    // =======================
     
     output.push(item)
   }
