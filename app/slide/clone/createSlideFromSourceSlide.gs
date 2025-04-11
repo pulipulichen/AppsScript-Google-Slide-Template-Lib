@@ -1,4 +1,4 @@
-function createSlideFromSourceSlide(sourceSlide) {
+function createSlideFromSourceSlide(sourceSlide, presentation) {
   let sourceLayout = sourceSlide.getLayout()
 
 
@@ -6,6 +6,9 @@ function createSlideFromSourceSlide(sourceSlide) {
   const sortedPlaceholders = sortPlaceholders(placeholders)
 
   // const types = sortedPlaceholders.map(i => i.type)
+  // Logger.log(types)
+
+
   const targetLayout = detectLayout(sortedPlaceholders)
 
 

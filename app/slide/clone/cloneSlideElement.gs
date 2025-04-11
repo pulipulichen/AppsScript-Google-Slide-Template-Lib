@@ -1,4 +1,4 @@
-function cloneSlideElements(element, slide) {
+function cloneSlideElement(element, slide) {
   let type = element.getPageElementType()
   // Logger.log({type, isSheetChart: (type == 'SHEETS_CHART')})
 

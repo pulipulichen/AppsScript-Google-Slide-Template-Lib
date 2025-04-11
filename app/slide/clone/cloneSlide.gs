@@ -21,32 +21,13 @@ function cloneSlide(url, footer) {
 
     // =================================
 
-    const slide = createSlideFromSourceSlide(sourceSlide)
+    const slide = createSlideFromSourceSlide(sourceSlide, presentation)
+
+    const clonedElementIDList = cloneSlidePlaceholders(sourceSlide, slide)
 
     // ==================================
 
-    let CURRENT_ELEMENT_MAP = {}
-    for (let element of slide.getPageElements()) {
-      let key = getElementKey (element)
-      // Logger.log({key})
-      CURRENT_ELEMENT_MAP[getElementKey (element)] = element
-    }
-
-    for (let element of sourceSlide.getPageElements()) {
-      cloneSlideElements(element, slide)
-
-      let key = getElementKey (element)
-      // Logger.log({key})
-      if (CURRENT_ELEMENT_MAP[key]) {
-        // Logger.log('嘗試刪除 ' + CURRENT_ELEMENT_MAP[key])
-        try {
-          CURRENT_ELEMENT_MAP[key].remove()
-        }
-        catch (e) {
-          Logger.log(e)
-        }
-      }
-    }
+    cloneSlidePageElements (presentation, sourceSlide, slide, clonedElementIDList)
 
     // ====================================
 
