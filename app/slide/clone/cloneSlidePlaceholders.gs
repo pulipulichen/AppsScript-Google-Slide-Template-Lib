@@ -1,8 +1,8 @@
 function cloneSlidePlaceholders(sourceSlide, slide) {
-  const sourcePlaceholders = sourceSlide.getLayout().getPlaceholders();
+  const sourcePlaceholders = sourceSlide.getPlaceholders();
   const sourceSortedPlaceholders = sortPlaceholders(sourcePlaceholders)
 
-  const targetPlaceholders = slide.getLayout().getPlaceholders();
+  const targetPlaceholders = slide.getPlaceholders();
   const targetSortedPlaceholders = sortPlaceholders(targetPlaceholders)
 
 
@@ -20,14 +20,24 @@ function cloneSlidePlaceholders(sourceSlide, slide) {
     let sourceType = sourcePlaceholder.getPageElementType()
     let targetType = targetPlaceholder.getPageElementType()
 
+    Logger.log([sourceType, targetType])
     if (sourceType != targetType) {
       continue
     }
 
+    let objectId
+    // Logger.log(sourceType)
     if (sourceType == 'SHAPE') {
-      let paragraphs = sourcePlaceholder.asShape().getText().getListParagraphs()
-      for (let paragraph of paragraphs) {
-        targetPlaceholder.getText().appendParagraph(paragraph)
+      objectId = sourcePlaceholder.asShape().getObjectId()
+      let sourceTextRange = sourcePlaceholder.asShape().getText()
+      let targetTextRange = targetPlaceholder.getText()
+      // let paragraphs = .getParagraphs()
+      // Logger.log({count: paragraphs.length})
+      for (let paragraph of sourceTextRange.getParagraphs()) {
+        targetTextRange.setText(paragraph.getRange().asRenderedString())
+      }
+      for (let paragraph of sourceTextRange.getListParagraphs()) {
+        targetTextRange.insertParagraph(paragraph)
       }
         
       // Logger.log(sourceData.asRenderedString())
@@ -36,14 +46,18 @@ function cloneSlidePlaceholders(sourceSlide, slide) {
       // }
     }
     else if (sourceType == 'IMAGE') {
+      objectId = sourcePlaceholder.asImage().getObjectId()
       let sourceData = sourcePlaceholder.asImage().getBlob()
       let image = targetPlaceholder.replace(sourceData, false)
       // image.replace(image)
     }
 
-
-    clonedElementIDList.push(sourcePlaceholder.getObjectId())
+    
+    clonedElementIDList.push(objectId)
   }
+
+  Logger.log(clonedElementIDList)
+  
 
   return clonedElementIDList
 }

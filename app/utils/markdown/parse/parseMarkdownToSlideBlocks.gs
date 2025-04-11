@@ -1,4 +1,4 @@
-function parseMarkdownToSlideBlocks(markdown) {
+function parseMarkdownToSlideBlocks(markdown, config = {}) {
   markdown = markdown.trim()
   if (markdown.startsWith('---')) {
     markdown = markdown.slice(markdown.indexOf('\n') + 1).trim()
@@ -137,7 +137,8 @@ function parseMarkdownToSlideBlocks(markdown) {
         
         appendBody()
 
-        const imageUrl = trimmed.match(/^!\[.*?\]\((.*?)\)/)[1];
+        // const imageUrl = trimmed.match(/^!\[.*?\]\((.*?)\)/)[1];
+        const imageUrl = extractImageURLFromMarkdown(trimmed, config)
         const orientation = checkImageOrientation(imageUrl)
 
         result.push({

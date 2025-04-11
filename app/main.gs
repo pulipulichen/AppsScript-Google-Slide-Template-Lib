@@ -1,7 +1,7 @@
 function markdownToSlide(md, config = {}) {
   const presentation = SlidesApp.getActivePresentation();
 
-  let slidesConfig = parseMarkdownToSlideBlocks(md)
+  let slidesConfig = parseMarkdownToSlideBlocks(md, config)
   
   for (let i = 0; i < slidesConfig.length; i++) {
     let {elements, layout, notes, types, cite, clone} = slidesConfig[i]
