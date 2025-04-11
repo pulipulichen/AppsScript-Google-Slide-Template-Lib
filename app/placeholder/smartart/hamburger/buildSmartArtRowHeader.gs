@@ -1,5 +1,5 @@
 function buildSmartArtRowHeader(baseLeft, baseSize, fontSize, titleLength, slide, itemShape, title, foreground, background) {
-  Logger.log({baseLeft, baseSize, fontSize, titleLength})
+  // Logger.log({baseLeft, baseSize, fontSize, titleLength})
 
   baseSize = baseSize / 2
 

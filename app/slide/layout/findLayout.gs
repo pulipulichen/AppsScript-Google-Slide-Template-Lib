@@ -15,10 +15,18 @@ function findLayout(layoutName) {
     }
 
     for (let name of layoutNameList) {
+      if (LAYOUT_CACHE_MASTER[name]) {
+        return LAYOUT_CACHE_MASTER[name]
+      }
+
       if (LAYOUT_CACHE[name]) {
         return LAYOUT_CACHE[name]
       }
     }
+  }
+
+  if (LAYOUT_CACHE_MASTER[layoutName]) {
+    return LAYOUT_CACHE_MASTER[layoutName]
   }
 
 
@@ -45,4 +53,10 @@ function getLayoutsList () {
   loadLayoutCache()
 
   return LAYOUT_CACHE
+}
+
+function getLayoutsMasterList () {
+  loadLayoutCache()
+
+  return LAYOUT_CACHE_MASTER
 }

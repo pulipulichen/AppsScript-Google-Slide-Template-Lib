@@ -94,7 +94,7 @@ function sortPlaceholders(placeholders, config = {}) {
       }
     }
 
-    Logger.log(baseGroup)
+    // Logger.log(baseGroup)
     groups.push(baseGroup)
   }
 

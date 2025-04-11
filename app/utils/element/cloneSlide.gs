@@ -17,7 +17,7 @@ function cloneSlide(url, footer) {
       presentationID, slideID
     } = extractPresentationAndSlideId(url)
 
-    Logger.log({presentationID, slideID})
+    // Logger.log({presentationID, slideID})
 
     if (!presentationID || !slideID) {
       Logger.log('Error url: ' + url)
@@ -51,6 +51,9 @@ function cloneSlide(url, footer) {
 
     let sourceLayout = sourceSlide.getLayout()
     let layoutName = sourceLayout.getLayoutName()
+
+    // let masterID = sourceLayout.getMaster().getObjectId()
+    
     // let sourcePageElements = sourceSlide.getPageElements()
 
     // =================================

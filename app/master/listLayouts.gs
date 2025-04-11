@@ -1,10 +1,11 @@
 function listLayouts() {
   const presentation = SlidesApp.getActivePresentation();
 
-  let layouts = getLayoutsList()
+  let layouts = getLayoutsMasterList()
 
   for (let name of Object.keys(layouts)) {
     let layoutObject = layouts[name]
+
     const slide = presentation.appendSlide(layoutObject);
 
     const textBox = slide.insertTextBox(name, 0, 0, presentation.getPageWidth(), parseInt(presentation.getPageHeight() / 3))
