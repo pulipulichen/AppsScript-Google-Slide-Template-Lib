@@ -21,6 +21,7 @@ function setPlaceholderBody(shape, markdown, alignCenter = false) {
   let textRange = placeholder.getText()
   
   let level0Type = null
+  let hasList = false
   for (let item of list) {
     let {level, type, text} = item
 
@@ -35,25 +36,27 @@ function setPlaceholderBody(shape, markdown, alignCenter = false) {
     // textRange.appendParagraph(text)
 
     // Logger.log(textRange.getLength())
+    let paragraphRange
     if (textRange.getLength() === 1) {
       textRange.setText(indent)
       // Logger.log("[" + indent + text + ']')
-      insertMarkdownToParagraph(textRange, text)
+      paragraphRange = insertMarkdownToParagraph(textRange, text)
     }
     else {
-      let paragraph = textRange.appendParagraph(indent)
+      paragraph = textRange.appendParagraph(indent)
       // Logger.log("[" + indent + text + ']')
-      insertMarkdownToParagraph(paragraph.getRange(), text)
+      paragraphRange = insertMarkdownToParagraph(paragraph.getRange(), text)
+    }
+
+    Logger.log({level, type, text})
+    if (type !== 'paragraph') {
+      let listStype = textRange.getListStyle()
+      listStype.applyListPreset(SlidesApp.ListPreset.DISC_CIRCLE_SQUARE);
+      hasList = true
     }
   }
 
-  let listStype = textRange.getListStyle()
-
-  // let paragraphStyle = textRange.getParagraphStyle()
-  // paragraphStyle.setSpaceAbove(0.5)
-  // paragraphStyle.setSpaceBelow(3)
-
-  listStype.applyListPreset(SlidesApp.ListPreset.DISC_CIRCLE_SQUARE);
+    
 
   // let paragraphs = textRange.getListParagraphs()
   // for (let paragraph of paragraphs) {
@@ -105,14 +108,18 @@ function setPlaceholderBody(shape, markdown, alignCenter = false) {
     shape.setContentAlignment(SlidesApp.ContentAlignment.MIDDLE)
 
     let textRange = shape.getText()
-    let paragraphStyle = textRange.getParagraphStyle()
+    
 
     // if (checkShapeOrientation(shape) === 'portrait') {
     //   if (pos.left === true) {
     //     // 設定水平
     //   }
     // }
-    // paragraphStyle.setParagraphAlignment(SlidesApp.ParagraphAlignment.CENTER)
+    if (hasList === false) {
+      let paragraphStyle = textRange.getParagraphStyle()
+      paragraphStyle.setParagraphAlignment(SlidesApp.ParagraphAlignment.CENTER)
+    }
+      
     
   }
 }

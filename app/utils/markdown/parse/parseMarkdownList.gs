@@ -5,9 +5,25 @@ function parseMarkdownList(markdown, config = {}) {
 
     const romanRegex = /^[ivxlcdmIVXLCDM]+\.$/;
 
-    for (const line of lines) {
+    for (let line of lines) {
+        line = convertPlainUrlsToMarkdownLinks(line)
+
         const match = line.match(/^(\s*)([\d]+\.|[a-zA-Z]{1,4}\.|[-*+])\s+(.+)$/);
-        if (!match) continue;
+        if (!match) {
+            let {
+                title, subtitle
+            } = parseMarkdownListItemTitle(line)
+            // 加入層級0
+            result.push({ 
+                level: -1, 
+                text: line, 
+                type: 'paragraph', 
+                title, 
+                subtitle, 
+                picture: parseMarkdownListExtractPicture(line, config)
+            });
+            continue
+        }
 
         const indent = match[1] || '';
         const marker = match[2];
@@ -31,17 +47,8 @@ function parseMarkdownList(markdown, config = {}) {
             indentStack.length = level + 1;
         }
 
-        let picture
-        try {
-            // picture = text.match(/!\[.*?\]\((.*?)\)/)[1];
-            picture = extractImageURLFromMarkdown(text, config)
-            
-            text = text.replace(/!\[.*?\]\(.*?\)/g, '')
-        }
-        catch (e) {
-            // Logger.log('沒有圖片：' + e)
-        }
-
+        let picture = parseMarkdownListExtractPicture(text, config)
+        
 
         let {title, subtitle} = parseMarkdownListItemTitle(text)
 
@@ -50,6 +57,21 @@ function parseMarkdownList(markdown, config = {}) {
 
     return result;
 }
+
+function parseMarkdownListExtractPicture(text, config) {
+    let picture
+    try {
+        // picture = text.match(/!\[.*?\]\((.*?)\)/)[1];
+        picture = extractImageURLFromMarkdown(text, config)
+        
+        text = text.replace(/!\[.*?\]\(.*?\)/g, '')
+    }
+    catch (e) {
+        // Logger.log('沒有圖片：' + e)
+    }
+    return picture
+}
+
 
 function parseMarkdownListItemTitle(text) {
     
@@ -69,4 +91,11 @@ function parseMarkdownListItemTitle(text) {
     }
 
     return {title, subtitle}
+}
+
+function convertPlainUrlsToMarkdownLinks(markdown) {
+// 排除圖片 ![](url) 和連結 [text](url)
+const regex = /(?<!\]\()(?<!\!\[.*?\]\()\b(https?:\/\/[\w\-._~:\/?#[\]@!$&'()*+,;=%]+)/g;
+
+return markdown.replace(regex, (url) => `[${url}](${url})`);
 }
