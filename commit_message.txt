@@ -1,1 +1,1 @@
-改進cloneSlide的問題
+修正clonSide的footer問題

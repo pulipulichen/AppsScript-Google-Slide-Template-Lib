@@ -3,6 +3,7 @@ function cloneSlideFooter(footer, presentation, slide) {
     const elements = slide.getPageElements();
 
     let pageHeight = presentation.getPageHeight()
+    let footerMaxTop = pageHeight * 0.8
 
     let footerElement = elements[0]
     let leftBottomDistance = footerElement.getLeft() + (pageHeight - footerElement.getTop() - footerElement.getHeight())
@@ -10,6 +11,10 @@ function cloneSlideFooter(footer, presentation, slide) {
     for (let i = 1; i < elements.length; i++) {
       let element = elements[i]
       if (element.getPageElementType() != 'SHAPE') {
+        continue
+      }
+
+      if (element.getTop() < footerMaxTop) {
         continue
       }
 

@@ -10,7 +10,7 @@ function cloneSlidePageElements (presentation, sourceSlide, slide, clonedElement
   let topMax = pageHeight * 0.8
 
   for (let element of sourceSlide.getPageElements()) {
-    Logger.log(element.getObjectId())
+    // Logger.log(element.getObjectId())
     if (clonedElementIDList.includes(element.getObjectId())) {
       continue
     }

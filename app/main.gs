@@ -6,9 +6,7 @@ function markdownToSlide(md, config = {}) {
   for (let i = 0; i < slidesConfig.length; i++) {
     let {elements, layout, notes, types, cite, clone} = slidesConfig[i]
 
-      
-    if (clone) {
-      cloneSlide(clone, config.footer)
+    if (elements.length === 0 && !layout && !notes) {
       continue
     }
 
@@ -47,5 +45,14 @@ function markdownToSlide(md, config = {}) {
     })
     setPlaceholderCite(sortedPlaceholdersAll, cite)
     setPlaceholderFooter(sortedPlaceholdersAll, config.footer)
+
+
+    // ================
+      
+    if (clone) {
+      cloneSlide(clone, config.footer)
+      // continue
+    }
+
   }
 }

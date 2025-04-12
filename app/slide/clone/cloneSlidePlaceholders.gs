@@ -20,7 +20,7 @@ function cloneSlidePlaceholders(sourceSlide, slide) {
     let sourceType = sourcePlaceholder.getPageElementType()
     let targetType = targetPlaceholder.getPageElementType()
 
-    Logger.log([sourceType, targetType])
+    // Logger.log([sourceType, targetType])
     if (sourceType != targetType) {
       continue
     }
@@ -56,7 +56,7 @@ function cloneSlidePlaceholders(sourceSlide, slide) {
     clonedElementIDList.push(objectId)
   }
 
-  Logger.log(clonedElementIDList)
+  // Logger.log(clonedElementIDList)
   
 
   return clonedElementIDList
