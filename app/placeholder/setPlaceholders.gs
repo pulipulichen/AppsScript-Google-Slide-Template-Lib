@@ -25,13 +25,11 @@ function setPlaceholders(sortedPlaceholders, types, config) {
       continue
     }
 
-    if (type == 'TITLE' || type == 'SUBTITLE') {
-      // Logger.log(`${type} | text: ${text}`)
-      object.getText().setText(text);
-
-      if (type === 'SUBTITLE') {
-        object.getText().getParagraphStyle().setParagraphAlignment(SlidesApp.ParagraphAlignment.CENTER)
-      }
+    if (type == 'TITLE') {
+      setPlaceholderTitle(object, text)
+    }
+    else if (type == 'SUBTITLE') {
+      setPlaceholderSubtitle(object, text)
     }
     else if (type.startsWith('BODY')) {
       if (isMarkdownPicture(text)) {
