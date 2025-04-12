@@ -1,4 +1,4 @@
-function setPlaceholderBody(shape, markdown) {
+function setPlaceholderBody(shape, markdown, alignCenter = false) {
   if (typeof(shape.asShape) === 'function') {
     shape = shape.asShape()
   }
@@ -89,4 +89,30 @@ function setPlaceholderBody(shape, markdown) {
   //     }
   //   }
   // }
+
+  if (alignCenter === true) {
+    // 先看看是垂直還是橫向
+
+    // let pos = checkShapePosition(shape)
+    // if (checkShapeOrientation(shape) === 'portrait') {
+    //   if (pos.left === true) {
+    //     // 設定水平
+    //   }
+    // }
+    // else {
+
+    // }
+    shape.setContentAlignment(SlidesApp.ContentAlignment.MIDDLE)
+
+    let textRange = shape.getText()
+    let paragraphStyle = textRange.getParagraphStyle()
+
+    // if (checkShapeOrientation(shape) === 'portrait') {
+    //   if (pos.left === true) {
+    //     // 設定水平
+    //   }
+    // }
+    // paragraphStyle.setParagraphAlignment(SlidesApp.ParagraphAlignment.CENTER)
+    
+  }
 }

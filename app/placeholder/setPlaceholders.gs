@@ -1,7 +1,9 @@
 function setPlaceholders(sortedPlaceholders, types, config) {
   let typesCounter = {}
 
-  Logger.log(types)
+  // Logger.log(types)
+  let bodyAlignCenter = checkBodyNeedAlignCenter(sortedPlaceholders, types)
+
   for (let i = 0; i < sortedPlaceholders.length; i++) {
 
     let {type, object} = sortedPlaceholders[i]
@@ -45,7 +47,7 @@ function setPlaceholders(sortedPlaceholders, types, config) {
         setPlaceholderTable(object, text)
       }
       else {
-        setPlaceholderBody(object, text)
+        setPlaceholderBody(object, text, bodyAlignCenter)
       }
     }
     else if (type == 'PICTURE') {
