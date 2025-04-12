@@ -7,6 +7,10 @@ function findLayout(layoutName) {
     return LAYOUT_CACHE['TITLE_AND_BODY']
   }
 
+  if (LAYOUT_NAME_MAP[layoutName]) {
+    layoutName = LAYOUT_NAME_MAP[layoutName]
+  }
+
   if (LAYOUT_DICT[layoutName]) {
     let layoutNameList = LAYOUT_DICT[layoutName]
 
