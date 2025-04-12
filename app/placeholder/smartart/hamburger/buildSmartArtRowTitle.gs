@@ -1,4 +1,4 @@
-function buildSmartArtRowTitle(baseLeft, baseSize, slide, itemShape, fontSize, background, titleLength) {
+function buildSmartArtRowTitle(baseLeft, baseSize, slide, itemShape, fontSize, background, titleLength,title) {
   let headerShapeWidthMargin = (baseSize / 2)
   let headerShapeWidth = headerShapeWidthMargin * (titleLength + 1)
 

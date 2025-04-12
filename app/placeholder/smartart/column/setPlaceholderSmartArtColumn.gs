@@ -9,6 +9,8 @@ function setPlaceholderSmartArtColumn(shape, markdown, config = {}) {
   
   // Logger.log({list})
 
+  shape = resizeShapeByRatio(shape, layoutConfig.width, layoutConfig.height)
+
   // ===========================
 
   const containerWidth = shape.getWidth()

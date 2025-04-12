@@ -43,7 +43,7 @@ function setPlaceholderSmartArtHamburgerItemShapeNumberPictureTitleText(slide, i
 
   // =========================
     
-  let titleShape = buildSmartArtRowTitle(baseLeft, baseSize, slide, itemShape, fontSize, background, titleLength)
+  let titleShape = buildSmartArtRowTitle(baseLeft, baseSize, slide, itemShape, fontSize, background, titleLength, title)
   group.push(titleShape)
   baseLeft = baseLeft + titleShape.getWidth()
 

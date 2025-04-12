@@ -56,10 +56,12 @@ function parseMarkdownListItemTitle(text) {
     // 分析標題
     let title, subtitle
 
-    let pos = text.indexOf(':')
-    if (pos === -1) {
-        pos = text.indexOf('：')
-    }
+    // let pos = text.indexOf(':')
+    // if (pos === -1) {
+    //     pos = text.indexOf('：')
+    // }
+
+    let pos = text.indexOf(' : ')
     
     if (pos > -1) {
         title = text.slice(0, pos).trim()

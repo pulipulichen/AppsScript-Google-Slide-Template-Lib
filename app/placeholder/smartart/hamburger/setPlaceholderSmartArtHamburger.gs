@@ -9,7 +9,7 @@ function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
 
   // ===========================
 
-  shape = resizeShapeByRatio(shape, layoutConfig.width, layoutConfig.getHeight)
+  shape = resizeShapeByRatio(shape, layoutConfig.width, layoutConfig.height)
 
   // ===========================
 
