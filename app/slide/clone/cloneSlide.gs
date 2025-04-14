@@ -23,8 +23,8 @@ function cloneSlide(url, footer) {
 
     const slide = createSlideFromSourceSlide(sourceSlide, presentation)
 
-    // const clonedElementIDList = cloneSlidePlaceholders(sourceSlide, slide)
-    const clonedElementIDList = []
+    const clonedElementIDList = cloneSlidePlaceholders(sourceSlide, slide)
+    // const clonedElementIDList = []
 
     // ==================================
 

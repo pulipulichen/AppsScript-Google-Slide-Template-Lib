@@ -2,13 +2,15 @@ function cloneSlidePlaceholders(sourceSlide, slide) {
   const sourcePlaceholders = sourceSlide.getPlaceholders();
   const sourceSortedPlaceholders = sortPlaceholders(sourcePlaceholders)
 
+  // Logger.log({sourceSortedPlaceholdersTypes: sourceSortedPlaceholders.map(s => s.type)})
+
   const targetPlaceholders = slide.getPlaceholders();
   const targetSortedPlaceholders = sortPlaceholders(targetPlaceholders)
 
 
   let clonedElementIDList = []
   for (let i = 0; i < sourceSortedPlaceholders.length; i++) {
-    let sourcePlaceholder = sourcePlaceholders[i]
+    let sourcePlaceholder = sourceSortedPlaceholders[i].object
     let targetPlaceholder = targetSortedPlaceholders[i].object
 
     if (!targetPlaceholder) {
@@ -28,8 +30,8 @@ function cloneSlidePlaceholders(sourceSlide, slide) {
     let objectId
     // Logger.log(sourceType)
     if (sourceType == 'SHAPE') {
-      objectId = sourcePlaceholder.asShape().getObjectId()
-      let sourceTextRange = sourcePlaceholder.asShape().getText()
+      objectId = sourcePlaceholder.getObjectId()
+      let sourceTextRange = sourcePlaceholder.getText()
       let targetTextRange = targetPlaceholder.getText()
       // let paragraphs = .getParagraphs()
       // Logger.log({count: paragraphs.length})
@@ -46,8 +48,8 @@ function cloneSlidePlaceholders(sourceSlide, slide) {
       // }
     }
     else if (sourceType == 'IMAGE') {
-      objectId = sourcePlaceholder.asImage().getObjectId()
-      let sourceData = sourcePlaceholder.asImage().getBlob()
+      objectId = sourcePlaceholder.getObjectId()
+      let sourceData = sourcePlaceholder.getBlob()
       let image = targetPlaceholder.replace(sourceData, false)
       // image.replace(image)
     }
@@ -56,7 +58,7 @@ function cloneSlidePlaceholders(sourceSlide, slide) {
     clonedElementIDList.push(objectId)
   }
 
-  // Logger.log(clonedElementIDList)
+  // Logger.log({clonedElementIDList})
   
 
   return clonedElementIDList

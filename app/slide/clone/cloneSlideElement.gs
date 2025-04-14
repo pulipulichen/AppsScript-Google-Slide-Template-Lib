@@ -3,7 +3,7 @@ function cloneSlideElement(element, slide, sourcePresentation, presentation) {
   
 
   let type = element.getPageElementType()
-  Logger.log({type, isSheetChart: (type == 'SHEETS_CHART')})
+  // Logger.log({type, isSheetChart: (type == 'SHEETS_CHART')})
 
   if (type == 'SHAPE') {
     let {elementObject,
@@ -12,6 +12,10 @@ function cloneSlideElement(element, slide, sourcePresentation, presentation) {
       targetWidth,
       targetHeight
     } = calcTargetPresentationPostionSize(element.asShape(), sourcePresentation, presentation)
+
+    if (elementObject.getText().getAutoTexts().length > 0) {
+      return false
+    }
 
     // Logger.log({targetLeft,
     //   targetTop,

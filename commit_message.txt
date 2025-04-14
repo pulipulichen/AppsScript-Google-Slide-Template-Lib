@@ -1,1 +1,1 @@
-複製slide：修正位置跟長寬高的問題
+複製slide：來處理Placeholder的問題
