@@ -1,4 +1,4 @@
-function cloneSlidePageElements (presentation, sourceSlide, slide, clonedElementIDList) {
+function cloneSlidePageElements (sourcePresentation, presentation, sourceSlide, slide, clonedElementIDList) {
   let CURRENT_ELEMENT_MAP = {}
   for (let element of slide.getPageElements()) {
     let key = getElementKey (element)
@@ -6,8 +6,12 @@ function cloneSlidePageElements (presentation, sourceSlide, slide, clonedElement
     CURRENT_ELEMENT_MAP[getElementKey (element)] = element
   }
 
-  let pageHeight = presentation.getPageHeight()
-  let topMax = pageHeight * 0.8
+  // let sourcePageHeight = sourcePresentation.getPageHeight()
+  // let sourcePageWidth = sourcePresentation.getPageWidth()
+
+  // let pageHeight = presentation.getPageHeight()
+  // let pageWidth = presentation.getPageWidth()
+  
 
   for (let element of sourceSlide.getPageElements()) {
     // Logger.log(element.getObjectId())
@@ -19,7 +23,7 @@ function cloneSlidePageElements (presentation, sourceSlide, slide, clonedElement
     //   continue
     // }
 
-    cloneSlideElement(element, slide)
+    cloneSlideElement(element, slide, sourcePresentation, presentation)
 
     let key = getElementKey (element)
     // Logger.log({key})

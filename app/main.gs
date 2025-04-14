@@ -6,7 +6,18 @@ function markdownToSlide(md, config = {}) {
   for (let i = 0; i < slidesConfig.length; i++) {
     let {elements, layout, notes, types, cite, clone} = slidesConfig[i]
 
+    // Logger.log({elements, layout, notes, types, cite, clone})
+
     if (elements.length === 0 && !layout && !notes) {
+      if (clone) {
+        cloneSlide(clone, config.footer)
+        // continue
+      }
+      continue
+    }
+
+    if (elements.length === 0 && clone) {
+      cloneSlide(clone, config.footer)
       continue
     }
 

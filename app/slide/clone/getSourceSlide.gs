@@ -33,5 +33,8 @@ function getSourceSlide(url) {
     return false
   }
 
-  return sourceSlide
+  return {
+    sourcePresentation,
+    sourceSlide
+  }
 }

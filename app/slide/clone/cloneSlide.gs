@@ -13,7 +13,7 @@ function cloneSlide(url, footer) {
 
     // let sourcePresentationID = `1NTCU0a5boGoZwCkdSPG1ZmrrcU3hL_A1iEcew4LvZ5w`
     // let sourceSlideID = 'g349d52b76eb_1_0'
-    let sourceSlide = getSourceSlide(url)
+    let {sourcePresentation, sourceSlide} = getSourceSlide(url)
 
     if (!sourceSlide) {
       return false
@@ -28,7 +28,7 @@ function cloneSlide(url, footer) {
 
     // ==================================
 
-    cloneSlidePageElements (presentation, sourceSlide, slide, clonedElementIDList)
+    cloneSlidePageElements (sourcePresentation, presentation, sourceSlide, slide, clonedElementIDList)
 
     // ====================================
 
