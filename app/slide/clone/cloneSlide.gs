@@ -1,4 +1,4 @@
-function cloneSlide(url, footer) {
+function cloneSlide(url, footer, offset = 0) {
   try {
     // url = 'https://docs.google.com/presentation/d/1NTCU0a5boGoZwCkdSPG1ZmrrcU3hL_A1iEcew4LvZ5w/edit#slide=id.SLIDES_API1556269895_0'
 
@@ -21,7 +21,7 @@ function cloneSlide(url, footer) {
 
     // =================================
 
-    const slide = createSlideFromSourceSlide(sourceSlide, presentation)
+    const slide = createSlideFromSourceSlide(sourceSlide, presentation, offset)
 
     const clonedElementIDList = cloneSlidePlaceholders(sourceSlide, slide)
     // const clonedElementIDList = []

@@ -1,4 +1,4 @@
-function createSlideFromSourceSlide(sourceSlide, presentation) {
+function createSlideFromSourceSlide(sourceSlide, presentation, offset = 0) {
   let sourceLayout = sourceSlide.getLayout()
   let sourceMasterID = sourceLayout.getMaster().getObjectId()
   let sourceLayoutID = sourceMasterID + '_' + sourceLayout.getLayoutName()
@@ -25,7 +25,9 @@ function createSlideFromSourceSlide(sourceSlide, presentation) {
   // // =================================
 
   // const layoutObject = findLayout(layoutName)
-  const slide = presentation.appendSlide(targetLayout)
+  // const slide = presentation.appendSlide(targetLayout)
+
+  const slide = insertSlide(presentation, targetLayout, offset)
 
   return slide
 }

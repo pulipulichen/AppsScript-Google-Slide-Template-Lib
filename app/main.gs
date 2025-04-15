@@ -3,6 +3,7 @@ function markdownToSlide(md, config = {}) {
 
   let slidesConfig = parseMarkdownToSlideBlocks(md, config)
   
+  let cloneSlideCount = 0
   for (let i = 0; i < slidesConfig.length; i++) {
     let {elements, layout, notes, types, cite, clone} = slidesConfig[i]
 
@@ -10,14 +11,14 @@ function markdownToSlide(md, config = {}) {
 
     if (elements.length === 0 && !layout && !notes) {
       if (clone) {
-        cloneSlide(clone, config.footer)
+        cloneSlide(clone, config.footer, i + cloneSlideCount)
         // continue
       }
       continue
     }
 
     if (elements.length === 0 && clone) {
-      cloneSlide(clone, config.footer)
+      cloneSlide(clone, config.footer, i + cloneSlideCount)
       continue
     }
 
@@ -32,7 +33,7 @@ function markdownToSlide(md, config = {}) {
     
     // ==================
 
-    const slide = presentation.appendSlide(layoutObject);
+    const slide = insertSlide(presentation, layoutObject, i + cloneSlideCount)
 
     // ==================
 
@@ -51,6 +52,11 @@ function markdownToSlide(md, config = {}) {
     setPlaceholders(sortedPlaceholders, types, config)
 
 
+    setupLayoutHook(slide)
+
+    // ==================
+
+
     const sortedPlaceholdersAll = sortPlaceholders(placeholders, {
       excludeBelowTop: 1
     })
@@ -61,7 +67,9 @@ function markdownToSlide(md, config = {}) {
     // ================
       
     if (clone) {
-      cloneSlide(clone, config.footer)
+      cloneSlideCount++
+      cloneSlide(clone, config.footer, i + cloneSlideCount)
+      
       // continue
     }
 
