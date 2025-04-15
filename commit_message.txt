@@ -1,1 +1,1 @@
-複製slide：來處理Placeholder的問題
+修正smartart的問題

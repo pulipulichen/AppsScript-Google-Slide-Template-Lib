@@ -74,6 +74,7 @@ function setPlaceholderSmartArtHamburger(shape, markdown, config = {}) {
     }
     else if (type === 'number' && !title && !picture) {
       let itemShape = setPlaceholderSmartArtInsertItemShape('RECTANGLE_SHADOW', slide, left, top, shapeWidth, shapeHeight)
+      // Logger.log({i, text})
       setPlaceholderSmartArtHamburgerItemShapeNumberCenter(slide, itemShape, progress, i, text, colorConfig, layoutConfig)
     }
     else if (type === 'bullet' && title && picture) {

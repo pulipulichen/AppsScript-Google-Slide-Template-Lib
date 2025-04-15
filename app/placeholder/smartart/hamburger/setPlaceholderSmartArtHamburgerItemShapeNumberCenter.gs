@@ -1,6 +1,8 @@
 function setPlaceholderSmartArtHamburgerItemShapeNumberCenter(slide, itemShape, progress, i, text, colorConfig, layoutConfig) {
   let {foreground, background} = getColor(progress, colorConfig)
 
+  // Logger.log({foreground, background})
+
   setPlaceholderSmartArtContainer(itemShape, foreground, background)  
 
   let fontSize = setPlaceholderSmartArtHamburgerFontSize(itemShape)
@@ -26,4 +28,6 @@ function setPlaceholderSmartArtHamburgerItemShapeNumberCenter(slide, itemShape, 
   group.push(subgroup)
 
   slide.group(group).sendToBack()
+
+  // Logger.log({text, layoutConfig})
 }

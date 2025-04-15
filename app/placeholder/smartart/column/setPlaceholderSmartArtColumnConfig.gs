@@ -44,7 +44,7 @@ function setPlaceholderSmartArtColumnConfig(config) {
   }
 
   let colorConfig = {
-    palette: 'theme', 
+    palette: 'blue', 
     reverse: false, 
     sequential: false,
     invert: true,

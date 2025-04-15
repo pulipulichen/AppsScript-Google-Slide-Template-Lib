@@ -45,7 +45,7 @@ function setPlaceholderSmartArtHamburgerConfig(config) {
   }
 
   let colorConfig = {
-    palette: 'theme', 
+    palette: 'blue', 
     reverse: false, 
     sequential: false,
     invert: true,

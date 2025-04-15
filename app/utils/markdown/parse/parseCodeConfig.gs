@@ -12,7 +12,8 @@ function parseCodeConfig(line) {
     try {
       let config = line.slice(startPos, endPos + 1)
       // Logger.log(config)
-      config = JSON.parse(config)
+      // config = JSON.parse(config)
+      eval(`config = ${config}`)
 
       return {
         type: line.slice(line.lastIndexOf('```') + 3, line.indexOf('{')).trim(),
