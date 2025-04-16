@@ -86,25 +86,25 @@ function parseMarkdownToSlideBlocks(markdown, config = {}) {
       const trimmed = line.trim();
 
       // let isBody = false
-      if (trimmed.startsWith('::: layout:') || trimmed.startsWith('::: layout=')) {
+      if (trimmed.startsWith('::: layout:') || trimmed.startsWith('::: layout=') || trimmed.startsWith(':::: layout=') || trimmed.startsWith(':::: layout ')) {
         layout = trimmed.slice(trimmed.indexOf(' layout') + 8)
       }
-      else if (trimmed.startsWith('::: cite:') || trimmed.startsWith('::: cite=') || trimmed.startsWith('::: cite ')) {
+      else if (trimmed.startsWith('::: cite:') || trimmed.startsWith('::: cite=') || trimmed.startsWith('::: cite ') || trimmed.startsWith(':::: cite:') || trimmed.startsWith(':::: cite=') || trimmed.startsWith(':::: cite ')) {
         cite = trimmed.slice(trimmed.indexOf(' cite') + 6).trim()
       }
-      else if (trimmed.startsWith('::: smartart')) {
+      else if (trimmed.startsWith('::: smartart') || trimmed.startsWith(':::: smartart')) {
         smartart = trimmed.slice(trimmed.indexOf(' smartart') + 1)
       }
-      else if (trimmed.startsWith('::: note')) {
+      else if (trimmed.startsWith('::: note') || trimmed.startsWith(':::: note')) {
         notes.push(trimmed.slice(trimmed.indexOf(' note') + 5))
       }
-      else if (trimmed.startsWith('::: notes')) {
+      else if (trimmed.startsWith('::: notes') || trimmed.startsWith(':::: notes')) {
         notes.push(trimmed.slice(trimmed.indexOf(' notes') + 6))
       }
       else if (isMarkdownClone(trimmed)) {
         clone = trimmed
       }
-      else if (trimmed.startsWith('::: ')) {
+      else if (trimmed.startsWith('::: ') || trimmed.startsWith(':::: ')) {
         let text = trimmed.slice(trimmed.indexOf('::: ') + 4).trim()
         if (!cite) {
           cite = text

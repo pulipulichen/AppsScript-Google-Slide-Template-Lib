@@ -2,6 +2,8 @@ function calcTargetPresentationPostionSize(elementObject, sourcePresentation, pr
   let sourcePageHeight = sourcePresentation.getPageHeight()
   let sourcePageWidth = sourcePresentation.getPageWidth()
 
+  // Logger.log({h: elementObject.getHeight(), w: elementObject.getWidth()})
+
   // 轉換成比例
   let heightRatio = elementObject.getHeight() / sourcePageHeight
   let widthRatio = elementObject.getWidth() / sourcePageWidth

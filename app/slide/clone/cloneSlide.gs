@@ -1,4 +1,4 @@
-function cloneSlide(url, footer, offset = 0) {
+function cloneSlide(url, footer, offset = 0, notes = null) {
   try {
     // url = 'https://docs.google.com/presentation/d/1NTCU0a5boGoZwCkdSPG1ZmrrcU3hL_A1iEcew4LvZ5w/edit#slide=id.SLIDES_API1556269895_0'
 
@@ -38,6 +38,8 @@ function cloneSlide(url, footer, offset = 0) {
 
     cloneSlideNote(sourceSlide, slide)
 
+    Logger.log({notes})
+    setNotes(slide, notes)
     // Logger.log('3')    
 
     // ===================================

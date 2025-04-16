@@ -9,16 +9,17 @@ function markdownToSlide(md, config = {}) {
 
     // Logger.log({elements, layout, notes, types, cite, clone})
 
+    // Logger.log({notes})
     if (elements.length === 0 && !layout && !notes) {
       if (clone) {
-        cloneSlide(clone, config.footer, i + cloneSlideCount)
+        cloneSlide(clone, config.footer, i + cloneSlideCount, notes)
         // continue
       }
       continue
     }
 
     if (elements.length === 0 && clone) {
-      cloneSlide(clone, config.footer, i + cloneSlideCount)
+      cloneSlide(clone, config.footer, i + cloneSlideCount, notes)
       continue
     }
 
@@ -32,6 +33,8 @@ function markdownToSlide(md, config = {}) {
     }
     
     // ==================
+
+    Logger.log({layoutObject, placeholders: elements.map(t => t.type), e: elements[0]})
 
     const slide = insertSlide(presentation, layoutObject, i + cloneSlideCount)
 
@@ -68,7 +71,7 @@ function markdownToSlide(md, config = {}) {
       
     if (clone) {
       cloneSlideCount++
-      cloneSlide(clone, config.footer, i + cloneSlideCount)
+      cloneSlide(clone, config.footer, i + cloneSlideCount, notes)
       
       // continue
     }

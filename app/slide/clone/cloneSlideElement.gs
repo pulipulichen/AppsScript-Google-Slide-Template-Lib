@@ -14,7 +14,10 @@ function cloneSlideElement(element, slide, sourcePresentation, presentation) {
     } = calcTargetPresentationPostionSize(element.asShape(), sourcePresentation, presentation)
 
     if (elementObject.getText().getAutoTexts().length > 0) {
-      return false
+      let content = elementObject.getText().asString()
+      if (isNaN(content)) {
+        return false
+      }
     }
 
     // Logger.log({targetLeft,
@@ -30,26 +33,34 @@ function cloneSlideElement(element, slide, sourcePresentation, presentation) {
     //   targetHeight)
 
     let object = slide.insertShape(elementObject)
+    
+    let rotation = object.getRotation()
+    // object.setRotation(0)
+
+    if (rotation > 0 && ( Math.round(object.getWidth() / object.getHeight() * 1000 ) === Math.round(targetWidth / targetHeight * 1000) )) {
+
+      // Logger.log({ow: object.getWidth(), oh: object.getHeight(), tw: targetWidth, th: targetHeight})
+      // 不設定寬高
+    }
+    else {
+      object.setWidth(targetWidth)
+      object.setHeight(targetHeight)
+    }
+
+      
+
+    // object.setRotation(rotation)
+
     object.setTop(targetTop)
     object.setLeft(targetLeft)
-    object.setWidth(targetWidth)
-    object.setHeight(targetHeight)
+
+
+    // object.setRotation(elementObject.getRotation())
+
+    // Logger.log({rotation: elementObject.getRotation(), TRotation: object.getRotation()})
   }
   else if (type == 'IMAGE') {
-    let {elementObject,
-      targetLeft,
-      targetTop,
-      targetWidth,
-      targetHeight
-    } = calcTargetPresentationPostionSize(element.asImage(), sourcePresentation, presentation)
-    
-    let object = slide.insertImage(elementObject)
-    object.setTop(targetTop)
-    object.setLeft(targetLeft)
-    object.setWidth(targetWidth)
-    object.setHeight(targetHeight)
-
-    object.replace(object.getBlob())
+    cloneSlideElementImage(element, sourcePresentation, presentation, slide)
   }
   else if (type == 'GROUP') {
     slide.insertGroup(element.asGroup())

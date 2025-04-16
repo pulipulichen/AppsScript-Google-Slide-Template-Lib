@@ -1,4 +1,4 @@
-function createSlideFromSourceSlide(sourceSlide, presentation, offset = 0) {
+function createSlideFromSourceSlide(sourceSlide, presentation, offset = 0, notes = null) {
   let sourceLayout = sourceSlide.getLayout()
   let sourceMasterID = sourceLayout.getMaster().getObjectId()
   let sourceLayoutID = sourceMasterID + '_' + sourceLayout.getLayoutName()
@@ -27,7 +27,11 @@ function createSlideFromSourceSlide(sourceSlide, presentation, offset = 0) {
   // const layoutObject = findLayout(layoutName)
   // const slide = presentation.appendSlide(targetLayout)
 
-  const slide = insertSlide(presentation, targetLayout, offset)
+  // if (!targetLayout) {
+  // Logger.log({targetLayout, placeholders: sortedPlaceholders.map(t => t.type), sourceLayoutID})
+  // }
+
+  const slide = insertSlide(presentation, targetLayout, offset,)
 
   return slide
 }
