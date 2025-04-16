@@ -34,7 +34,7 @@ function markdownToSlide(md, config = {}) {
     
     // ==================
 
-    Logger.log({layoutObject, placeholders: elements.map(t => t.type), e: elements[0]})
+    // Logger.log({layoutObject, placeholders: elements.map(t => t.type), e: elements[0]})
 
     const slide = insertSlide(presentation, layoutObject, i + cloneSlideCount)
 
