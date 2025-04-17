@@ -22,8 +22,22 @@ function setPlaceholderBody(shape, markdown, alignCenter = false) {
   
   let level0Type = null
   let hasList = false
+
+  let listStartPos = 0
+  let listEndPos = 0
+  let needSetList = false
   for (let item of list) {
     let {level, type, text} = item
+
+    // if (type === 'paragraph' && needSetList) {
+    //   Logger.log({listStartPos, listEndPos})
+    //   let listRange = textRange.getRange(listStartPos, listEndPos)
+    //   let listStype = listRange.getListStyle()
+    //   listStype.applyListPreset(SlidesApp.ListPreset.DISC_CIRCLE_SQUARE);
+
+    //   listStartPos = listEndPos
+    //   needSetList = false
+    // }
 
     if (level === 0 && !level0Type) {
       level0Type = type
@@ -48,13 +62,26 @@ function setPlaceholderBody(shape, markdown, alignCenter = false) {
       paragraphRange = insertMarkdownToParagraph(paragraph.getRange(), text)
     }
 
-    Logger.log({level, type, text})
+    // Logger.log({level, type, text})
+
+    let paragraphTextLength = paragraphRange.asString().trim().length
     if (type !== 'paragraph') {
-      let listStype = textRange.getListStyle()
-      listStype.applyListPreset(SlidesApp.ListPreset.DISC_CIRCLE_SQUARE);
-      hasList = true
+      hasList = true      
+      needSetList = true
     }
+    else {
+      listStartPos = listStartPos + paragraphTextLength
+    }
+
+    listEndPos = listEndPos + paragraphTextLength
   }
+
+  if (needSetList) {
+    let listRange = textRange.getRange(listStartPos, textRange.getEndIndex())
+    let listStype = listRange.getListStyle()
+    listStype.applyListPreset(SlidesApp.ListPreset.DISC_CIRCLE_SQUARE);
+  }
+    
 
     
 
