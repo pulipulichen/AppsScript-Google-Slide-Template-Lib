@@ -8,11 +8,11 @@ function setPlaceholderCite(sortedPlaceholders, cite) {
     let {type, object} = sortedPlaceholders[i]
     
     // Logger.log([type, object.getPageElementType()])
-    if (type == 'BODY') {
+    if (type.startsWith('BODY')) {
       let paragraphRange = object.getText()
       
       let exclude = ['link']
-      if ( (cite.startsWith('https://') || cite.startsWith('http://')) && cite.length < 50 ) {
+      if ( (cite.startsWith('https://') || cite.startsWith('http://')) ) {
         cite = `[${cite}](${cite})`
         exclude = []
       }
@@ -24,4 +24,6 @@ function setPlaceholderCite(sortedPlaceholders, cite) {
       return true
     }
   }
+
+  Logger.log('錯誤，沒有找到object: ' + cite)
 }

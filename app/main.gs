@@ -7,7 +7,7 @@ function markdownToSlide(md, config = {}) {
   for (let i = 0; i < slidesConfig.length; i++) {
     let {elements, layout, notes, types, cite, clone} = slidesConfig[i]
 
-    // Logger.log({elements, layout, notes, types, cite, clone})
+    Logger.log({elements, layout, notes, types, cite, clone})
 
     // Logger.log({notes})
     if (elements.length === 0 && !layout && !notes) {
