@@ -5,9 +5,9 @@ function markdownToSlide(md, config = {}) {
   
   let cloneSlideCount = 0
   for (let i = 0; i < slidesConfig.length; i++) {
-    let {elements, layout, notes, types, cite, clone} = slidesConfig[i]
+    let {elements, layout, notes, types, cite, clone, draws} = slidesConfig[i]
 
-    Logger.log({elements, layout, notes, types, cite, clone})
+    // Logger.log({elements, layout, notes, types, cite, clone})
 
     // Logger.log({notes})
     if (elements.length === 0 && !layout && !notes) {
@@ -54,6 +54,7 @@ function markdownToSlide(md, config = {}) {
 
     setPlaceholders(sortedPlaceholders, types, config)
 
+    setDraws(slide, draws)
 
     setupLayoutHook(slide)
 

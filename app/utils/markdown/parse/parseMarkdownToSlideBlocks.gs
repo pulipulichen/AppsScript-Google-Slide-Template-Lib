@@ -48,6 +48,8 @@ function parseMarkdownToSlideBlocks(markdown, config = {}) {
     let clone = null
     const result = [];
 
+    const draws = []
+
     let bodyBuffer = []
 
     let appendBody = () => {
@@ -95,8 +97,11 @@ function parseMarkdownToSlideBlocks(markdown, config = {}) {
       else if (trimmed.startsWith('::: smartart') || trimmed.startsWith(':::: smartart')) {
         smartart = trimmed.slice(trimmed.indexOf(' smartart') + 1)
       }
-      else if (trimmed.startsWith('::: note') || trimmed.startsWith(':::: note')) {
+      else if (trimmed.startsWith('::: note ') || trimmed.startsWith(':::: note ')) {
         notes.push(trimmed.slice(trimmed.indexOf(' note') + 5))
+      }
+      else if (trimmed.indexOf('::: draw ') > -1 && trimmed.indexOf('::: draw ') < 2) {
+        draws.push(trimmed.slice(trimmed.indexOf(' draw') + 5).trim())
       }
       else if (trimmed.startsWith('::: notes') || trimmed.startsWith(':::: notes')) {
         notes.push(trimmed.slice(trimmed.indexOf(' notes') + 6))
@@ -232,6 +237,7 @@ function parseMarkdownToSlideBlocks(markdown, config = {}) {
     }
 
     item.notes = notes
+    item.draws = draws
     // Logger.log(notes)
 
     // =======================
