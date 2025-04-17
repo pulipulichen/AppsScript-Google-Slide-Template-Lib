@@ -20,7 +20,7 @@ function setPlaceholderTable (shape, tableMarkdown) {
     // 建立表格
     const table = shape.getParentPage()
       .insertTable(
-        tableData.rows, 
+        tableData.rows + tableData.headers.length, 
         tableData.cols, 
         shape.getLeft(),
         shape.getTop(),
@@ -29,7 +29,7 @@ function setPlaceholderTable (shape, tableMarkdown) {
       );
 
     let headersLength = tableData.headers.length
-    for (let row = 0; row < tableData.rows; row++) {
+    for (let row = 0; row < tableData.rows + headersLength; row++) {
       for (let col = 0; col < tableData.cols; col++) {
         const cell = table.getRow(row).getCell(col);
 
@@ -40,6 +40,14 @@ function setPlaceholderTable (shape, tableMarkdown) {
         else {
           text = tableData.data[(row - headersLength)][col]
         }
+
+        let isEmpty = (!text || text.trim() === '')
+        
+        if (isEmpty) {
+          text = '-'
+        }
+        
+
         let textRange = cell.getText()
         textRange.setText(text);
 
@@ -67,6 +75,10 @@ function setPlaceholderTable (shape, tableMarkdown) {
             fill.setSolidFill("#f3f3f3"); // 淺灰色
           }
           textStyle.setForegroundColor(shapeStyle.fontColor)
+        }
+
+        if (isEmpty) {
+          textRange.getParagraphs()[0].getRange().clear()
         }
       }
     }
