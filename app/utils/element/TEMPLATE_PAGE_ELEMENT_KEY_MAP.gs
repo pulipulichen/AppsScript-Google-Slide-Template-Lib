@@ -7,6 +7,7 @@ let TEMPLATE_PAGE_ELEMENT_KEY_MAP = {
   'PINK_ROUND_RECTANGLE': ['g34b65297041_5_0', 'SHAPE'],
   'DRAW_chat_white': ['g34f09461204_0_0', 'SHAPE'],
   'DRAW_chat': ['g34f09461204_0_1', 'SHAPE'],
+  'DRAW_comment': ['g34f09461204_0_1', 'SHAPE'],
   'DRAW_chat_invert': ['g34f09461204_0_1', 'SHAPE'],
   'DRAW_number': ['g34f09461204_0_2', 'SHAPE'],
   'DRAW_frame': ['g34f09461204_0_3', 'SHAPE'],

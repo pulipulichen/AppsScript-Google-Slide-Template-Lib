@@ -88,23 +88,23 @@ function parseMarkdownToSlideBlocks(markdown, config = {}) {
       const trimmed = line.trim();
 
       // let isBody = false
-      if (trimmed.startsWith('::: layout:') || trimmed.startsWith('::: layout=') || trimmed.startsWith(':::: layout=') || trimmed.startsWith(':::: layout ')) {
-        layout = trimmed.slice(trimmed.indexOf(' layout') + 8)
+      if (trimmed.indexOf('::: layout') < 3 && trimmed.indexOf('::: layout') > -1) {
+        layout = trimmed.slice(trimmed.indexOf(' layout') + 8).trim()
       }
       else if (trimmed.startsWith('::: cite:') || trimmed.startsWith('::: cite=') || trimmed.startsWith('::: cite ') || trimmed.startsWith(':::: cite:') || trimmed.startsWith(':::: cite=') || trimmed.startsWith(':::: cite ')) {
         cite = trimmed.slice(trimmed.indexOf(' cite') + 6).trim()
       }
       else if (trimmed.startsWith('::: smartart') || trimmed.startsWith(':::: smartart')) {
-        smartart = trimmed.slice(trimmed.indexOf(' smartart') + 1)
+        smartart = trimmed.slice(trimmed.indexOf(' smartart') + 1).trim()
       }
       else if (trimmed.startsWith('::: note ') || trimmed.startsWith(':::: note ')) {
-        notes.push(trimmed.slice(trimmed.indexOf(' note') + 5))
+        notes.push(trimmed.slice(trimmed.indexOf(' note') + 5).trim())
       }
       else if (trimmed.indexOf('::: draw ') > -1 && trimmed.indexOf('::: draw ') < 2) {
         draws.push(trimmed.slice(trimmed.indexOf(' draw') + 5).trim())
       }
       else if (trimmed.startsWith('::: notes') || trimmed.startsWith(':::: notes')) {
-        notes.push(trimmed.slice(trimmed.indexOf(' notes') + 6))
+        notes.push(trimmed.slice(trimmed.indexOf(' notes') + 6).trim())
       }
       else if (isMarkdownClone(trimmed)) {
         clone = trimmed

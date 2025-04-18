@@ -83,7 +83,7 @@ function parseMarkdownListItemTitle(text) {
     //     pos = text.indexOf('：')
     // }
 
-    let pos = text.indexOf(' : ')
+    let pos = text.indexOf(': ')
     
     if (pos > -1) {
         title = text.slice(0, pos).trim()
