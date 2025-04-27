@@ -6,6 +6,7 @@ function setPlaceholderSmartArtColumnConfig(config) {
     // colorInvert = true
     layout = {},
     color = {},
+    size = null,
   } = config
 
 
@@ -32,6 +33,7 @@ function setPlaceholderSmartArtColumnConfig(config) {
     arrow: false,
     height: config.height,
     width: config.width,
+    size: size,
     ...layout
   }
 

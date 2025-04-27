@@ -4,6 +4,7 @@ function setPlaceholderSmartArtHamburgerConfig(config) {
     // palette = "theme",
     // colorReverse = false,
     // colorInvert = true
+    size = null,
     layout = {},
     color = {}
   } = config
@@ -33,6 +34,7 @@ function setPlaceholderSmartArtHamburgerConfig(config) {
     arrow: false,
     height: config.height,
     width: config.width,
+    size: size,
     ...layout
   }
 
