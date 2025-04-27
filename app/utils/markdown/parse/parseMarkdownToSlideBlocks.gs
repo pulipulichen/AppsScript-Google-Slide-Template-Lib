@@ -7,6 +7,9 @@ function parseMarkdownToSlideBlocks(markdown, config = {}) {
     markdown = markdown.slice(0, markdown.lastIndexOf('\n') ).trim()
   }
 
+  markdown = markdown.replace(/\n----\s*\n/g, "\n----\n");
+  markdown = markdown.replace(/\n---\s*\n/g, "\n----\n");
+
   markdown = markdown.split('\n--- \n').join('\n----\n')
   markdown = markdown.split('\n---  \n').join('\n----\n')
   markdown = markdown.split('\n---\n').join('\n----\n')
