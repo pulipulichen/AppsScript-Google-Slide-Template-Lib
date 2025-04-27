@@ -35,6 +35,11 @@ function setPlaceholderSmartArtColumnConfig(config) {
     ...layout
   }
 
+  if (layoutConfig.size) {
+    layoutConfig.width = layoutConfig.size
+    layoutConfig.height = layoutConfig.size
+  }
+
   // ===========================
 
   if (typeof(color) === 'string') {

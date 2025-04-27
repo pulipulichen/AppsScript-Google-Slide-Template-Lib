@@ -18,6 +18,8 @@ let LAYOUT_DICT = {
   '雙欄h': ['simple-light-2_TITLE_AND_BODY_1_3', 'p9_CUSTOM_3_1_1_1_1_1'],
   '雙欄h73': ['simple-light-2_TITLE_AND_BODY_1_3_2',],
   '雙欄h37': ['simple-light-2_TITLE_AND_BODY_1_3_2_1',],
+  '雙欄73': ['simple-light-2_TITLE_AND_BODY_1_3_2',],
+  '雙欄37': ['simple-light-2_TITLE_AND_BODY_1_3_2_1',],
   '文圖': ['p9_CUSTOM_3_1_2_1_1', ],
   '雙欄標題ht': ['simple-light-2_TITLE_AND_BODY_1_3_1',],
   '三欄標題ht': ['simple-light-2_TITLE_AND_BODY_1_3_1_1',],

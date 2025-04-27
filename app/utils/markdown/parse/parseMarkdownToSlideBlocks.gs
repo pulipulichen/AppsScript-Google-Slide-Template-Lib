@@ -46,6 +46,7 @@ function parseMarkdownToSlideBlocks(markdown, config = {}) {
     let cite = null
     let smartart = null
     let clone = null
+    let cloneEnd = null
     const result = [];
 
     const draws = []
@@ -107,7 +108,12 @@ function parseMarkdownToSlideBlocks(markdown, config = {}) {
         notes.push(trimmed.slice(trimmed.indexOf(' notes') + 6).trim())
       }
       else if (isMarkdownClone(trimmed)) {
-        clone = trimmed
+        if (!clone) {
+          clone = trimmed
+        }
+        else {
+          cloneEnd = trimmed
+        }
       }
       else if (trimmed.startsWith('::: ') || trimmed.startsWith(':::: ')) {
         let text = trimmed.slice(trimmed.indexOf('::: ') + 4).trim()
@@ -244,6 +250,9 @@ function parseMarkdownToSlideBlocks(markdown, config = {}) {
 
     if (clone) {
       item.clone = clone
+    }
+    if (cloneEnd) {
+      item.cloneEnd = cloneEnd
     }
 
     // =======================
